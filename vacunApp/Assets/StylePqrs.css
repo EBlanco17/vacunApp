@@ -1,0 +1,106 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background-image: radial-gradient(circle at 50% -20.71%, #ffffa1 0, #ffff92 12.5%, #fff285 25%, #f1d479 37.5%, #d8b46c 50%, #bc9660 62.5%, #a27d56 75%, #8c694e 87.5%, #785947 100%);
+    font-family: sans-serif;
+    color: #fff;
+}
+
+.botonsalir {
+    background: rgba(0, 0, 0, 0.5);
+    width: 100px;
+    text-align: center;
+    border-left: 5px;
+    border-right: 5px;
+}
+
+    .botonsalir:hover {
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+.navbar-brand {
+    height: 60px;
+}
+
+.nav-item {
+    top: 50%;
+    height: 40px;
+    text-align: center;
+}
+
+
+
+.lblReport {
+    color: #bbe1fa;
+    font-family: Bahnschrift Condensed;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.pqrsbox {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 700px;
+    height: 400px;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    font-size: 20px;
+    background: rgba(0,0,0,0.5);
+}
+
+h1 {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    color: #fff;
+    font-family: Bahnschrift Condensed;
+}
+
+.dropReport:hover, .txtReport {
+    background: rgba(0,0,0,0.2);
+}
+
+.dropReport, .txtReport, .btnEnviar {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.dropReport, .txtReport {
+    resize: none;
+    width: 100%;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 3px solid #fff;
+    outline: none;
+    height: 35px;
+    color: #000000;
+    font-size: 16px;
+    background-color: transparent;
+    font-family: Bahnschrift Condensed;
+}
+
+.btnEnviar {
+    border: none;
+    outline: none;
+    height: 40px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #49b031;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: .3s ease-in-out;
+    font-family: Bahnschrift Condensed;
+}
+
+    .btnEnviar:hover {
+        background-color: #d0793f;
+    }
+
+footer {
+    position: absolute;
+    top: 110%;
+    height: 120px;
+    width: 100%;
+}

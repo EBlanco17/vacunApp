@@ -1,0 +1,137 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background-image: radial-gradient(circle at 50.57% 43.52%, #ffa13a 0, #ff8f44 12.5%, #ff7b4c 25%, #ff6751 37.5%, #f25353 50%, #da4053 62.5%, #c43154 75%, #b02554 87.5%, #9f1d56 100%);
+    font-family: sans-serif;
+    color: #fff;
+}
+
+.botonsalir {
+    background: rgba(0, 0, 0, 0.5);
+    width: 100px;
+    text-align: center;
+    border-left: 5px;
+    border-right: 5px;
+}
+
+    .botonsalir:hover {
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+.navbar-brand {
+    height: 60px;
+}
+
+.nav-item {
+    top: 50%;
+    height: 40px;
+    text-align: center;
+}
+
+
+
+.Formbox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -10%);
+    width: 700px;
+    height: 1700px;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    font-size: 20px;
+    background: rgba(0,0,0,0.5);
+}
+
+h1 {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    color: #fff;
+    font-family: Bahnschrift Condensed;
+}
+
+h2 {
+    color: #fff;
+    text-align:left;
+    font-family: Bahnschrift Condensed;
+}
+
+.lbl {
+    font-weight: bold;
+    color: #bbe1fa;
+    font-family: Bahnschrift Condensed;
+}
+
+.radio input[type="radio"] {
+    width: auto;
+    float: left;
+    cursor: pointer;
+}
+
+.radio label:hover {
+    background: rgba(0,0,0,0.2);
+}
+
+.dropDept:hover, .dropMun:hover, .txt:hover {
+    background: rgba(0,0,0,0.2);
+}
+
+.radio label {
+    width: auto;
+    display: inline;
+    padding-left: 10px;
+    padding-right: 20px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    float: left;
+    font-size: 1rem;
+    color: #bfe1df !important;
+    font-family: Bahnschrift Condensed;
+}
+
+.lbl3 {
+    margin-left: 15px;
+    color: #bbe1fa;
+    font-family: Bahnschrift Condensed;
+}
+
+.dropDept, .dropMun, .txt, .btnSubmit {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.dropDept, .dropMun, .txt {
+    width: 50%;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 3px solid #fff;
+    outline: none;
+    height: 35px;
+    color: #1b262c;
+    font-size: 16px;
+    background-color: transparent;
+    font-family: Bahnschrift Condensed;
+}
+
+::placeholder {
+    color: rgba(255,255,255,.5);
+}
+
+.btnSubmit {
+    border: none;
+    outline: none;
+    height: 40px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #49b031;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: .3s ease-in-out;
+    font-family: Bahnschrift Condensed;
+}
+
+    .btnSubmit:hover {
+        background-color: #d0793f;
+    }
+

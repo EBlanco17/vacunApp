@@ -1,0 +1,137 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background-image: url("../Assets/imagenes/fondoRegister.gif");
+    background-size: cover;
+    font-family: sans-serif;
+}
+
+.Registerbox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -22%);
+    width: 400px;
+    height: 720px;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    background: rgba(0,0,0,0.5);
+}
+.navbar-brand {
+    height: 60px;
+}
+
+.nav-item {
+    top: 50%;
+    height: 40px;
+    text-align: center;
+}
+
+h2 {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    color: cornsilk;
+}
+
+.lblNombre,
+.lblApellido,
+.lblNaci,
+.lblGen,
+.lblDoc,
+.lblemail,
+.lblClave,
+.lblTel {
+    font-weight: bold;
+    color: #87d7f1;
+}
+
+.txtNombre, 
+.txtApellido, 
+.txtNaci,
+.dropGen, 
+.txtDoc, 
+.txtemail, 
+.txtClave, 
+.txtTel, 
+.btnSubmit {
+    width: 100%;
+    margin-bottom: 15px;
+}
+.dropGen {
+    border: none;
+    border-bottom: 3px solid #fff;
+    outline: none;
+    height: 35px;
+    color: cornsilk;
+    font-size: 16px;
+    background-color: rgba(0,0,0,0.5);
+}
+.txtNombre, 
+.txtApellido, 
+.txtNaci, 
+.txtDoc, 
+.txtemail, 
+.txtClave, 
+.txtTel {
+    border: none;
+    border-bottom: 3px solid #fff;
+    outline: none;
+    height: 35px;
+    color: cornsilk;
+    font-size: 16px;
+    background-color: transparent;
+}
+
+::placeholder {
+    color: lightblue;
+}
+
+.btnSubmit {
+    border: none;
+    outline: none;
+    height: 40px;
+    font-size: 16px;
+    color: #fff;
+    background-color: steelblue;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: .3s ease-in-out;
+}
+
+    .btnSubmit:hover {
+        background-color: lightsalmon;
+    }
+
+footer {
+    position: absolute;
+    top: 150%;
+    height: 120px;
+    width: 100%;
+}
+
+
+.tooltipDemo {
+    position: relative;
+    display: inline;
+    text-decoration: none;
+    left: 5px;
+    top: 0px;
+    text-align: center;
+    font-size: 13px;
+}
+
+
+    .tooltipDemo:hover:after {
+        background: #FF8F35;
+        background: rgb(255, 143, 53);
+        border-radius: 4px;
+        color: #fff;
+        width: 180px;
+        left: 320px;
+        top: -10px;
+        content: attr(alt);
+        position: absolute;
+        padding: 4px 4px;
+        z-index: 95;
+    }

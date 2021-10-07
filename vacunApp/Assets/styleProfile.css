@@ -1,0 +1,179 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background-image: radial-gradient(circle at 50% -20.71%, #ffffb4 0, #fffab0 10%, #ffecad 20%, #ffdca9 30%, #ffcba4 40%, #f2b99d 50%, #dca896 60%, #c79a8f 70%, #b68e89 80%, #a68583 90%, #9a7d7e 100%);
+    background-size: cover;
+}
+
+.bodyadmin {
+    background-image: radial-gradient(circle at 50% -20.71%, #ffdcff 0, #ffd0ff 12.5%, #ffc2ff 25%, #ffb1ff 37.5%, #d59df2 50%, #ac89d3 62.5%, #8977b6 75%, #6c679c 87.5%, #555986 100%);
+}
+
+.h2admin {
+    background: radial-gradient(circle, rgba(47,21,251,1) 0%, rgba(106,106,106,1) 100%);
+}
+
+.navbar-brand {
+    height: 60px;
+   }
+
+.nav-item {
+    top: 50%;
+    height: 40px;
+    text-align: center;
+   }
+
+
+
+.botonsalir {
+    background: rgba(0, 0, 0, 0.5);
+    width: 100px;
+    text-align: center;
+    border-left: 5px;
+    border-right: 5px;
+}
+    .botonsalir:hover {
+        background: rgba(0, 0, 0, 0.7);
+    }
+.botonadmin {
+    background: rgba(0, 0, 0, 0.2);
+    width: 250px;
+    text-align: center;
+    color: #fff;
+    margin-left: 15px;
+    
+}
+    .botonadmin:hover {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+.profilebox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    width: 500px;
+    height: 720px;
+    padding: 12px 40px;
+    box-sizing: border-box;
+    background: rgba(0,0,0,0.5);
+}
+
+h2 {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    color: #fff;
+    font-family: Bahnschrift Condensed;
+    background: radial-gradient(circle, rgba(93,1,1,1) 0%, rgba(255,145,0,1) 100%);
+}
+
+.idU {
+    border: none;
+    height: 15px;
+    color: #fff;
+    font-size: 12px;
+    background-color: transparent;
+}
+
+.lblNombre, 
+.lblApellido,
+.lblNaci,
+.lblGen, 
+.lblEdad, 
+.lblDoc, 
+.lblemail,
+.lblTel {
+    font-weight: bold;
+    color: #fff;
+    font-family: Arial;
+    font-size: 18px;
+}
+
+.txtNombre, 
+.txtApellido, 
+.txtNaci, 
+.txtGen, 
+.txtEdad, 
+.txtDoc,
+.txtemail, 
+.txtTel {
+    width: 100%;
+    margin-bottom: 15px;
+    font-family: Bahnschrift Condensed;
+}
+
+.btnSubmit {
+    width: 48%;
+    margin-bottom: 15px;
+    font-family: Bahnschrift Condensed;
+}
+
+.btnCambiar {
+    width: 48%;
+    margin-bottom: 15px;
+    font-family: Bahnschrift Condensed;
+}
+
+.txtNombre, 
+.txtApellido, 
+.txtNaci, 
+.txtGen, 
+.txtEdad, 
+.txtDoc, 
+.txtemail, 
+.txtTel {
+    border: none;
+    border-bottom: 3px solid #fff;
+    outline: none;
+    height: 35px;
+    color: #cbcbcb;
+    font-size: 24px;
+    background-color: transparent;
+    font-family: Bahnschrift Condensed;
+}
+
+.btnCambiar {
+    border: none;
+    outline: none;
+    height: 40px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #fff;
+    background: linear-gradient(180deg, #ee3939 0%, #ff9900 49%, #1838a0 50%, #57a5ce 100%);
+    background-size: 1px 100px;
+    transition: all .3s;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+    .btnCambiar:hover {
+        background-position: 0 -50px;
+        transition: all .3s;
+    }
+
+.btnSubmit {
+    border: none;
+    outline: none;
+    height: 40px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #fff;
+    background: linear-gradient(180deg, #04AA6D 0%, #00ff21 49%, #191818 50%, #57a5ce 100%);
+    background-size: 1px 100px;
+    transition: all .3s;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+    .btnSubmit:hover {
+        background-position: 0 -50px;
+        transition: all .3s;
+    }
+
+footer {
+    position: absolute;
+    top: 140%;
+    height: 120px;
+    width: 100%;
+}

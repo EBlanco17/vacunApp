@@ -1,0 +1,91 @@
+﻿body {
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-image: url("../Assets/imagenes/fondoRecuperar.jpg");
+}
+
+
+.navbar-brand {
+    height: 60px;
+}
+
+.nav-item {
+    top: 50%;
+    height: 40px;
+    text-align: center;
+}
+
+.user {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    top: calc(-100px/2);
+    left: calc(50% - 50px);
+    position: absolute;
+}
+
+h1 {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    color: cornsilk;
+}
+
+.recuperarbox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 250px;
+    padding: 80px 40px;
+    box-sizing: border-box;
+    background: rgba(0,0,0,0.5);
+    font-family: Bahnschrift Condensed;
+}
+
+
+.lblemail {
+    font-weight: bold;
+    color: #87d7f1;
+    font-size: 20px;
+}
+
+.txtemail, .btnEnviar {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.txtemail {
+    border: none;
+    border-bottom: 3px solid #fff;
+    outline: none;
+    height: 40px;
+    color: cornsilk;
+    font-size: 16px;
+    background-color: transparent;
+    font-size: 16px;
+}
+
+::placeholder {
+    color: lightblue;
+}
+
+.btnEnviar {
+    border: none;
+    outline: none;
+    height: 40px;
+    font-size: 16px;
+    color: #fff;
+    background-color: steelblue;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: .3s ease-in-out;
+}
+
+    .btnEnviar:hover {
+        background-color: #404040;
+    }
+   

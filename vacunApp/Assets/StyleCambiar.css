@@ -1,0 +1,105 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background-image: url("../Assets/imagenes/fondoCambiar.png");
+    background-size: cover;
+}
+
+.botonsalir {
+    background: rgba(0, 0, 0, 0.5);
+    width: 100px;
+    text-align: center;
+    border-left: 5px;
+    border-right: 5px;
+}
+
+    .botonsalir:hover {
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+.navbar-brand {
+    height: 60px;
+ }
+
+.nav-item {
+    top: 50%;
+    height: 40px;
+    text-align: center;
+   
+}
+
+
+.cambiarbox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 320px;
+    padding: 12px 40px;
+    box-sizing: border-box;
+    background: rgba(0,0,0,0.5);
+}
+
+h1 {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    color: cornsilk;
+    font-family: Bahnschrift Condensed;
+}
+
+
+.lblActual, .lblNueva, .lblConfirm {
+    font-weight: bold;
+    color: #87d7f1;
+    font-family: Arial;
+    font-size: 18px;
+}
+
+.txtPass {
+    width: 100%;
+    margin-bottom: 15px;
+    font-family: Bahnschrift Condensed;
+}
+
+.btnEnviar {
+    width: 100%;
+    margin-bottom: 15px;
+    font-family: Bahnschrift Condensed;
+}
+
+.txtPass {
+    border: none;
+    border-bottom: 3px solid #fff;
+    outline: none;
+    height: 35px;
+    color: cornsilk;
+    font-size: 24px;
+    background-color: transparent;
+}
+::placeholder {
+    color: lightblue;
+}
+
+.btnEnviar {
+    border: none;
+    outline: none;
+    height: 40px;
+    font-weight: bold;
+    font-size: 18px;
+    color: #fff;
+    background: linear-gradient(180deg, #04AA6D 0%, #00ff21 49%, #ce9d15 50%, #d9500b 100%);
+    background-size: 1px 100px;
+    transition: all .3s;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+    .btnEnviar:hover {
+        background-position: 0 -50px;
+        transition: all .3s;
+    }
+    footer{
+        height: 120px;
+    }

@@ -1,0 +1,133 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background-image: radial-gradient(circle, rgba(47,21,251,1) 0%, rgba(106,106,106,1) 100%);
+    font-family: sans-serif;
+    color: #fff;
+}
+
+.botonsalir {
+    background: rgba(0, 0, 0, 0.5);
+    width: 100px;
+    text-align: center;
+    border-left: 5px;
+    border-right: 5px;
+}
+
+    .botonsalir:hover {
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+.boxPqrs {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-22%);
+    width: 920px;
+    height: 760px;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    font-size: 20px;
+    background: rgba(0,0,0,0.5);
+    margin-bottom: 55px;
+}
+h2 {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    color: #fff;
+    font-family: Bahnschrift Condensed;
+}
+.navbar-brand {
+    height: 60px;
+}
+
+.nav-item {
+    top: 50%;
+    height: 40px;
+    text-align: center;
+}
+
+
+.lbltipo, 
+.lblIdU, 
+.lblId, 
+.lblRem, 
+.lblCorreo, 
+.lblFec, 
+.lblDesc, 
+.lblRes {
+    color: #bbe1fa;
+    font-family: Bahnschrift Condensed;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+.txtId, .txtIdU, .txtTipo, .txtRem, .txtCorreo, .txtFec {
+    background: rgba(0,0,0,0.2);
+}
+
+.txtRem, .txtCorreo, .txtFec, .btnEnviar {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.txtId, .txtIdU, .txtTipo {
+    width: 25%;
+    margin-bottom: 15px;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 3px solid #fff;
+    outline: none;
+    height: 35px;
+    font-size: 16px;
+    background-color: transparent;
+    font-family: Bahnschrift Condensed;
+    color: #fff;
+    text-align: center;
+}
+
+.txtRem, .txtCorreo, .txtFec {
+    resize: none;
+    width: 100%;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 3px solid #fff;
+    outline: none;
+    height: 35px;
+    color: #fff;
+    font-size: 16px;
+    background-color: transparent;
+    font-family: Bahnschrift Condensed;
+}
+
+.btnEnviar {
+    border: none;
+    outline: none;
+    height: 40px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #49b031;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: .3s ease-in-out;
+    font-family: Bahnschrift Condensed;
+}
+
+    .btnEnviar:hover {
+        background-color: #d0793f;
+    }
+
+.txtDesc, .txtRes {
+    resize: none;
+    width: 100%;
+}
+
+
+footer {
+    position: absolute;
+    top: 150%;
+    height: 120px;
+    width: 100%;
+}

@@ -1,0 +1,115 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background-image: radial-gradient(circle at 50% -20.71%, #ffffb4 0, #fffab0 10%, #ffecad 20%, #ffdca9 30%, #ffcba4 40%, #f2b99d 50%, #dca896 60%, #c79a8f 70%, #b68e89 80%, #a68583 90%, #9a7d7e 100%);
+    font-family: sans-serif;
+    color: #fff;
+}
+
+.botonsalir {
+    background: rgba(0, 0, 0, 0.5);
+    width: 100px;
+    text-align: center;
+    border-left: 5px;
+    border-right: 5px;
+}
+
+    .botonsalir:hover {
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+.navbar-brand {
+    height: 60px;
+}
+
+.nav-item {
+    top: 50%;
+    height: 40px;
+    text-align: center;
+}
+
+
+
+.lblFecha, .lblTipo {
+    color: #bbe1fa;
+    font-family: Bahnschrift Condensed;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.Formbox {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 700px;
+    height: 400px;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    font-size: 20px;
+    background: rgba(0,0,0,0.5);
+}
+
+h1 {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    color: #fff;
+    font-family: Bahnschrift Condensed;
+}
+
+.txtFecha {
+    background: rgba(0,0,0,0.2);
+}
+
+.dropDosis, .txtFecha, .btnCalcular {
+    width: 100%;
+    margin-bottom: 15px;
+}
+.dropDosis {
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 3px solid #fff;
+    outline: none;
+    height: 35px;
+    color: cornsilk;
+    font-size: 16px;
+    font-family: Bahnschrift Condensed;
+}
+.txtFecha {
+    width: 100%;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 3px solid #fff;
+    outline: none;
+    height: 35px;
+    color: cornsilk;
+    font-size: 16px;
+    background-color: transparent;
+    font-family: Bahnschrift Condensed;
+}
+
+.btnCalcular {
+    border: none;
+    outline: none;
+    height: 40px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #49b031;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: .3s ease-in-out;
+    font-family: Bahnschrift Condensed;
+}
+
+    .btnCalcular:hover {
+        background-color: #d0793f;
+    }
+footer {
+    position: absolute;
+    top: 110%;
+    height: 120px;
+    width: 100%;
+}

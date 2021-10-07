@@ -1,0 +1,96 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background-image: url("../Assets/imagenes/fondoLogin.gif");
+    background-size: cover;
+    font-family: sans-serif;
+}
+
+.loginbox {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 320px;
+    padding: 50px 40px;
+    box-sizing: border-box;
+    background: rgba(0,0,0,0.5);
+}
+.navbar-brand {
+    height: 60px;
+    
+}
+.nav-item {
+    top: 50%;
+    height: 40px;
+    text-align: center;
+}
+
+.user {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    top: calc(-100px/2);
+    left: calc(50% - 50px);
+    position: absolute;
+}
+
+h2 {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    color: cornsilk;
+}
+
+.lblemail,
+.lblClave {
+    font-weight: bold;
+    color: #87d7f1;
+}
+
+.txtemail, 
+.txtClave, 
+.btnSubmit {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.txtemail, 
+.txtClave {
+    border: none;
+    border-bottom: 3px solid #fff;
+    outline: none;
+    height: 40px;
+    color: cornsilk;
+    font-size: 16px;
+    background-color: transparent;
+}
+
+::placeholder {
+    color: lightblue;
+}
+
+.btnSubmit {
+    border: none;
+    outline: none;
+    height: 40px;
+    font-size: 16px;
+    color: #fff;
+    background-color: steelblue;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: .3s ease-in-out;
+}
+
+    .btnSubmit:hover {
+        background-color: lightsalmon;
+    }
+
+footer {
+    position: absolute;
+    top: 100%;
+    height: 120px;
+    width:100%;
+    
+}
