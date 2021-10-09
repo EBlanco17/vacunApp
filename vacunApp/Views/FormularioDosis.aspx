@@ -49,17 +49,20 @@
             <h1>Fechas de segunda dosis</h1>
             <asp:Label Text="Elija la vacuna aplicada en la primera dosis: " runat="server" CssClass="lblTipo" />
             <asp:DropDownList runat="server" ID="dropDosis" CssClass="dropDosis">
+                <asp:ListItem Text="SELECCIONE" Value="0" />
                 <asp:ListItem Text="PFIZER" Value="1" />
                 <asp:ListItem Text="ASTRAZENECA" Value="2" />
-                <asp:ListItem Text="JOHNSON & JOHNSON (JANSEN)" Value="3" />
+                <asp:ListItem Text="JOHNSON & JOHNSON (JANSSEN)" Value="3" />
                 <asp:ListItem Text="MODERNA" Value="4" />
                 <asp:ListItem Text="SINOVAC" Value="5" />
             </asp:DropDownList>
             <asp:Label Text="Ingrese la fecha de aplicación" runat="server" CssClass="lblFecha" />
-            <asp:TextBox runat="server" CssClass="txtFecha" ID="txtFecha" TextMode="Date" required />
+            <asp:TextBox runat="server" CssClass="txtFecha" ID="txtFecha" TextMode="Date" Required="true" SetFocusOnError="true" />
+           
             <asp:Button Text="Calcular" CssClass="btnCalcular" ID="btnCalcular" OnClick="btnCalcular_Click" runat="server" />
-            <asp:Label Text="Fecha de segunda dosis: " CssClass="lblFecha" runat="server" />
-            <asp:TextBox runat="server" CssClass="txtFecha" ID="txtFecha2" />
+
+            <asp:Label Text="Fecha de segunda dosis: " CssClass="lblFecha" runat="server"  />
+            <asp:TextBox runat="server" CssClass="txtFecha" ID="txtFecha2" TextMode="MultiLine" Columns="30" Rows="2" Enabled="false"/>
         </div>
     </form>
         

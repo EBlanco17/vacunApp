@@ -37,20 +37,50 @@ public partial class Views_PerfilAdmin : System.Web.UI.Page
         HttpContext.Current.Response.Redirect("../Views/CambiarPassword.aspx");
     }
 
+  
     protected void btnActualizar_Click(object sender, EventArgs e)
     {
         try
         {
             EUsuario user = new EUsuario();
             user.Id = ((EUsuario)Session["user"]).Id;
-            user.Nombres = txtNombre.Text.ToUpper();
-            user.Apellidos = txtApellido.Text.ToUpper();
-            user.Documento = txtDoc.Text;
+            if (txtNombre.Text.Length < 3)
+            {
+                HttpContext.Current.Response.Write("<script>alert('Nombre incorrecto')</script>");
+            }
+            else
+            {
+                user.Nombres = txtNombre.Text.ToUpper();
+            }
+            if (txtApellido.Text.Length < 4)
+            {
+                HttpContext.Current.Response.Write("<script>alert('Apellido incorrecto')</script>");
+            }
+            else
+            {
+                user.Apellidos = txtApellido.Text.ToUpper();
+            }
+            if (txtTel.Text.Length < 10)
+            {
+                HttpContext.Current.Response.Write("<script>alert('Número de teléfono incorrecto...Recuerde 60+indicativo+Número para fijo')</script>");
+            }
+            else
+            {
+                user.Telefono = txtTel.Text;
+            }
+            if (new Recursos().validarEmail(txtemail.Text))
+            {
+                user.Correo = txtemail.Text.ToUpper();
+            }
+            else
+            {
+                HttpContext.Current.Response.Write("<script>alert('Correo incorrecto')</script>");
+            }
+
             user.FechaNacimiento = DateTime.Parse(txtNac.Text);
+            user.Documento = txtDoc.Text;
             user.Genero = txtGen.Text;
-            user.Telefono = txtTel.Text;
-            user.Correo = txtemail.Text.ToUpper();
-            user.RolId = 2;
+            user.RolId = 1;
 
             Respuesta resp = new LUsuario().actualizarDatos(user);
             Session["user"] = resp.User;

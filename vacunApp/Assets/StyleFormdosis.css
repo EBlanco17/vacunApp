@@ -79,12 +79,14 @@ h1 {
     font-family: Bahnschrift Condensed;
 }
 .txtFecha {
+    text-align: center;
+    resize: none;
+    height: 60px;
     width: 100%;
     margin-bottom: 15px;
     border: none;
     border-bottom: 3px solid #fff;
     outline: none;
-    height: 35px;
     color: cornsilk;
     font-size: 16px;
     background-color: transparent;

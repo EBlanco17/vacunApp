@@ -50,21 +50,21 @@
             <asp:TextBox runat="server" CssClass="idU" ID="txtId" Enabled="False" Visible="True" placeholder="ID User" /><br />
 
             <asp:Label Text="Nombres:" CssClass="lblNombre" runat="server" />
-            <asp:TextBox runat="server" CssClass="txtNombre" ID="txtNombre" />
+            <asp:TextBox runat="server" CssClass="txtNombre" ID="txtNombre" Required="true" SetFocusOnError="true"/>
             <asp:Label Text="Apellidos:" CssClass="lblApellido" runat="server" />
-            <asp:TextBox runat="server" CssClass="txtApellido" ID="txtApellido" />
+            <asp:TextBox runat="server" CssClass="txtApellido" ID="txtApellido" Required="true" SetFocusOnError="true"/>
             <asp:Label Text="Fecha de Nacimiento:" CssClass="lblNaci" runat="server" />
             <asp:TextBox runat="server" CssClass="txtNaci" ID="txtNac" placeholder="DD/MM/AAAA" Enabled="false"/>
             <asp:Label Text="Edad:" CssClass="lblEdad" runat="server" />
             <asp:TextBox runat="server" CssClass="txtEdad" ID="txtEdad" Enabled="false" />
             <asp:Label Text="Genero:" CssClass="lblGen" runat="server" />
             <asp:TextBox runat="server" CssClass="txtGen" ID="txtGen" Enabled="false" />
-            <asp:Label Text="Documento:" CssClass="lblDoc" runat="server" />
+            <asp:Label Text="Documento:" CssClass="lblDoc" runat="server" Enabled="false"/>
             <asp:TextBox runat="server" CssClass="txtDoc" ID="txtDoc" />
             <asp:Label Text="Correo:" CssClass="lblemail" runat="server" />
-            <asp:TextBox runat="server" CssClass="txtemail" ID="txtemail" TextMode="Email" />
+            <asp:TextBox runat="server" CssClass="txtemail" ID="txtemail" TextMode="Email" Required="true" SetFocusOnError="true"/>
             <asp:Label Text="Telefono:" CssClass="lblTel" runat="server" />
-            <asp:TextBox runat="server" CssClass="txtTel" ID="txtTel" TextMode="Phone" />
+            <asp:TextBox runat="server" CssClass="txtTel" ID="txtTel" TextMode="Phone" Required="true" SetFocusOnError="true" MaxLength="10"/>
 
             <asp:Button Text="Actualizar Datos" CssClass="btnSubmit" ID="btnActualizar" OnClick="btnActualizar_Click" runat="server" />
             <asp:Button Text="Cambiar Contraseña" CssClass="btnCambiar" ID="btnCambiar" runat="server" OnClick="btnCambiar_Click" />

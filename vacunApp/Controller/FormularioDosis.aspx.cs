@@ -28,6 +28,13 @@ public partial class Views_FormDosis : System.Web.UI.Page
         Recursos recursos = new Recursos();
         int edad = recursos.CalcularEdad(((EUsuario)Session["user"]).FechaNacimiento);
         string mensaje = "";
+        DateTime fecha;
+        if ((!DateTime.TryParse(txtFecha.Text, out fecha)) || DateTime.Parse(txtFecha.Text) > DateTime.Today)
+        {
+            HttpContext.Current.Response.Write("<script>alert('Fecha de aplicacion incorrecta')</script>");
+        }
+        else {        
+        if (tipo > 0) { 
         switch (tipo)
         {
             case 1:
@@ -80,5 +87,11 @@ public partial class Views_FormDosis : System.Web.UI.Page
 
         fechaN = fechaN.AddDays(dias);
         txtFecha2.Text = Convert.ToString(fechaN.ToShortDateString()) + " " + mensaje;
+        }
+        else
+        {
+            HttpContext.Current.Response.Write("<script>alert('Seleccione un tipo de vacuna')</script>");
+        }
+        }
     }
 }
