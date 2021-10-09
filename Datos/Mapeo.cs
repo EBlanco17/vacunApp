@@ -17,5 +17,8 @@ namespace Datos
         public DbSet<EUsuario> usuario { get; set; }
         public DbSet<ESolicitudAdmin> solAdmin { get; set; }
         public DbSet<ESolicitud> solicitudes { get; set; }
+        public DbSet<ELocalidad>localidades { get; set; }
+        public DbSet<EBarrio> barrios { get; set; }
+        public DbSet<EFormulario> formulario { get; set; }
     }
 }

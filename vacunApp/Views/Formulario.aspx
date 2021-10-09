@@ -50,12 +50,12 @@
             <h1>Formulario de Vacunación VacunApp</h1>
 
             <h2>Datos Básicos</h2>
-            <asp:Label Text="Departamento:" CssClass="lbl" runat="server" />
-            <asp:TextBox ID="dropDepto" CssClass="dropDept" runat="server">
-            </asp:TextBox><br />
-            <asp:Label Text="Municipio:" CssClass="lbl" runat="server" />
-            <asp:TextBox ID="dropMun" CssClass="dropMun" runat="server">
-            </asp:TextBox><br />
+            <asp:Label Text="Localidad:" CssClass="lbl" runat="server" />
+            <asp:DropDownList  ID="dropLocal" CssClass="dropMun"  AutoPostBack="true" OnSelectedIndexChanged="dropLocal_SelectedIndexChanged" runat="server">
+            </asp:DropDownList><br />
+            <asp:Label Text="Sector:" CssClass="lbl" runat="server" />
+            <asp:DropDownList ID="dropBarrio" CssClass="dropMun" AutoPostBack="true" runat="server">
+            </asp:DropDownList><br />
             <asp:Label Text="EPS:" CssClass="lbl" runat="server" />
             <asp:TextBox runat="server" CssClass="txt" ID="txtEps" placeholder="Ingrese EPS" /><br />
 

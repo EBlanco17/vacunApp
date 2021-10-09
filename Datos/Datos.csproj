@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAOFormulario.cs" />
     <Compile Include="DAOSolicitud.cs" />
     <Compile Include="DAOSolicitudAdmin.cs" />
     <Compile Include="DAOUsuario.cs" />

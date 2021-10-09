@@ -87,6 +87,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EBarrio.cs" />
+    <Compile Include="EFormulario.cs" />
+    <Compile Include="ELocalidad.cs" />
     <Compile Include="ESolicitud.cs" />
     <Compile Include="ESolicitudAdmin.cs" />
     <Compile Include="EUsuario.cs" />

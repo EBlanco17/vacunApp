@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Encrypt.cs" />
+    <Compile Include="LFormulario.cs" />
     <Compile Include="LSolicitud.cs" />
     <Compile Include="LSolicitudAdmin.cs" />
     <Compile Include="LUsuario.cs" />

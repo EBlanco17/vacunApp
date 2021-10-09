@@ -100,9 +100,18 @@ public partial class Views_Registro : System.Web.UI.Page
         user.RolId = 2;
 
 
-        Respuesta resp = new LUsuario().registro(user, Txtemail.Text.ToUpper(), txtDoc.Text);
-        HttpContext.Current.Response.Write("<script>alert('" + resp.Mensaje + "')</script>");
-        Response.Redirect(resp.Url);
+        if (user.Nombres != null
+             && user.Apellidos != null
+             && user.FechaNacimiento != null
+             && user.Documento != null
+             && user.Correo != null
+             && user.Telefono != null
+             && user.Clave != null)
+        {
+            Respuesta resp = new LUsuario().registro(user, Txtemail.Text.ToUpper(), txtDoc.Text);
+            HttpContext.Current.Response.Write("<script>alert('" + resp.Mensaje + "')</script>");
+            Response.Redirect(resp.Url);
+        }
 
     }
 }
