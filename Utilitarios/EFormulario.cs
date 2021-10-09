@@ -34,6 +34,7 @@ namespace Utilitarios
         private char asma;
         private char obesidad;
         private char embarazo;
+        private char etapa;
 
         [Key]
         [Column("id")]
@@ -88,5 +89,7 @@ namespace Utilitarios
         public char Obesidad { get => obesidad; set => obesidad = value; }
         [Column("embarazo")]
         public char Embarazo { get => embarazo; set => embarazo = value; }
+        [Column("etapa")]
+        public char Etapa { get => etapa; set => etapa = value; }
     }
 }

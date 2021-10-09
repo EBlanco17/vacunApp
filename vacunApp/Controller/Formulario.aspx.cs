@@ -22,11 +22,12 @@ public partial class Views_Formulario : System.Web.UI.Page
                 
                 if(resp.Url == null)
                 {
-                    HttpContext.Current.Response.Write("<script>alert('" + resp.Mensaje + "')</script>");
+                    
                     IniciarLlenadoDropDown();
                 }
                 else
                 {
+                    HttpContext.Current.Response.Write("<script>alert('" + resp.Mensaje + "')</script>");
                     reenviarFormulario(new LFormulario().GetFormulario(((EUsuario)Session["user"]).Id));
                     Response.Redirect(resp.Url);
                 }
@@ -77,32 +78,64 @@ public partial class Views_Formulario : System.Web.UI.Page
     {
         if (verificarFormulario())
         {
+            EFormulario form = new EFormulario();
+            form.UsuarioId = ((EUsuario)Session["user"]).Id;
+            form.FechaIngreso = DateTime.Today;
+            form.LocalidadId = dropLocal.SelectedIndex;
+            form.BarrioId = dropBarrio.SelectedIndex;
+            form.Eps = txtEps.Text;
+            form.DiagnosticoCovid = Convert.ToChar(res1.SelectedValue);
+            form.TrabajoCovid = Convert.ToChar(res2.SelectedValue);
+            form.TrabajoNoCovid = Convert.ToChar(res3.SelectedValue);
+            form.EstudiaSalud = Convert.ToChar(res4.SelectedValue);
+            form.CuidaMayor = Convert.ToChar(res5.SelectedValue);
+            form.TrabajoEducacion = Convert.ToChar(res6.SelectedValue);
+            form.TrabajoSeguridad = Convert.ToChar(res7.SelectedValue);
+            form.TrabajoCadaveres = Convert.ToChar(res8.SelectedValue);
+            form.TrabajoReclusion = Convert.ToChar(res9.SelectedValue);
+            form.TrabajoBombero = Convert.ToChar(res10.SelectedValue);
+            form.TrabajoAeropuerto = Convert.ToChar(res11.SelectedValue);
+            form.Diabetes = Convert.ToChar(resE1.SelectedValue);
+            form.InsuficienciaRenal = Convert.ToChar(resE2.SelectedValue);
+            form.Vih = Convert.ToChar(resE3.SelectedValue);
+            form.Cancer = Convert.ToChar(resE4.SelectedValue);
+            form.Tuberculosis = Convert.ToChar(resE5.SelectedValue);
+            form.Epoc = Convert.ToChar(resE6.SelectedValue);
+            form.Asma = Convert.ToChar(resE7.SelectedValue);
+            form.Obesidad = Convert.ToChar(resE8.SelectedValue);
+            form.Embarazo = Convert.ToChar(resE9.SelectedValue);
+            form.Etapa = calcularEtapa();
+            Respuesta resp = new LFormulario().guardarFormulario(form);
+
+            HttpContext.Current.Response.Write("<script>alert('" + resp.Mensaje + "')</script>");
+            Response.Redirect(resp.Url);
 
             enviarFormulario(dropLocal.SelectedItem.Text,
             dropBarrio.SelectedItem.Text,
-            dropLocal.SelectedIndex,
-            dropBarrio.SelectedIndex,
-            txtEps.Text,
-            Convert.ToChar(res1.SelectedValue),
-            Convert.ToChar(res2.SelectedValue),
-            Convert.ToChar(res3.SelectedValue),
-            Convert.ToChar(res4.SelectedValue),
-            Convert.ToChar(res5.SelectedValue),
-            Convert.ToChar(res6.SelectedValue),
-            Convert.ToChar(res7.SelectedValue),
-            Convert.ToChar(res8.SelectedValue),
-            Convert.ToChar(res9.SelectedValue),
-            Convert.ToChar(res10.SelectedValue),
-            Convert.ToChar(res11.SelectedValue),
-            Convert.ToChar(resE1.SelectedValue),
-            Convert.ToChar(resE2.SelectedValue),
-            Convert.ToChar(resE3.SelectedValue),
-            Convert.ToChar(resE4.SelectedValue),
-            Convert.ToChar(resE5.SelectedValue),
-            Convert.ToChar(resE6.SelectedValue),
-            Convert.ToChar(resE7.SelectedValue),
-            Convert.ToChar(resE8.SelectedValue),
-            Convert.ToChar(resE9.SelectedValue));
+            form.LocalidadId,
+            form.BarrioId,
+            form.Eps,
+            form.DiagnosticoCovid,
+            form.TrabajoCovid,
+            form.TrabajoNoCovid,
+            form.EstudiaSalud,
+            form.CuidaMayor,
+            form.TrabajoEducacion,
+            form.TrabajoSeguridad,
+            form.TrabajoCadaveres,
+            form.TrabajoReclusion,
+            form.TrabajoBombero,
+            form.TrabajoAeropuerto,
+            form.Diabetes,
+            form.InsuficienciaRenal,
+            form.Vih,
+            form.Cancer,
+            form.Tuberculosis,
+            form.Epoc,
+            form.Asma,
+            form.Obesidad,
+            form.Embarazo,
+            form.Etapa);
 
             
         }
@@ -113,39 +146,76 @@ public partial class Views_Formulario : System.Web.UI.Page
         }
 
     }
-
-    public void enviarFormulario(string localidad, string barrio, int idLocal, int idBarrio, string eps, char resp1, char resp2,
-        char resp3, char resp4, char resp5, char resp6, char resp7, char resp8, char resp9, char resp10, char resp11, char respE1,
-        char respE2, char respE3, char respE4, char respE5, char respE6, char respE7, char respE8, char respE9)
+    public char calcularEtapa()
     {
         Recursos recursos = new Recursos();
-        string path = "";
         char etapa = '0';
         int edad = recursos.CalcularEdad(((EUsuario)Session["user"]).FechaNacimiento);
 
         if (edad >= 16)
         {
-            if (resp2 == 'S' || edad >= 80) //Etapa 1
+            if (Convert.ToChar(res2.SelectedValue) == '1' || edad >= 80) //Etapa 1
             {
-                path = "<img src='https://pbs.twimg.com/media/Ertb_JOW4AkADei.jpg' alt='Etapa 1 Covid-19'/>";
-                etapa = 'S';
+                etapa = '1';
             }
-            else if (resp3 == 'S' || resp4 == 'S' || (edad >= 60 && edad <= 79)) //Etapa 2
+            else if (Convert.ToChar(res3.SelectedValue) == '1' || Convert.ToChar(res4.SelectedValue) == '1' || (edad >= 60 && edad <= 79)) //Etapa 2
             {
-                path = "<img src='https://pbs.twimg.com/media/Ertb_pVW8AM98vg?format=jpg&name=medium' alt='Etapa 2 Covid-19'/>";
-                etapa = 'N';
+                etapa = '2';
             }
-            else if (resp5 == 'S' || resp6 == 'S' || resp7 == 'S' || resp8 == 'S'
-               || respE1 == 'S' || respE2 == 'S' || respE3 == 'S' || respE4 == 'S' || respE5 == 'S' ||
-               respE6 == 'S' || respE7 == 'S' || respE8 == 'S' || (edad >= 50 && edad <= 59)) //Etapa 3
+            else if (Convert.ToChar(res5.SelectedValue) == '1' || Convert.ToChar(res6.SelectedValue) == '1' || Convert.ToChar(res7.SelectedValue) == '1' || Convert.ToChar(res8.SelectedValue) == '1'
+               || Convert.ToChar(resE1.SelectedValue) == '1' || Convert.ToChar(resE2.SelectedValue) == '1' || Convert.ToChar(resE3.SelectedValue) == '1' || Convert.ToChar(resE4.SelectedValue) == '1' || Convert.ToChar(resE5.SelectedValue) == '1' ||
+               Convert.ToChar(resE6.SelectedValue) == '1' || Convert.ToChar(resE7.SelectedValue) == '1' || Convert.ToChar(resE8.SelectedValue) == '1' || (edad >= 50 && edad <= 59)) //Etapa 3
             {
-                path = "<img src='https://pbs.twimg.com/media/Ertb_pVW8AM98vg?format=jpg&name=medium' alt='Etapa 3 Covid-19'/>";
                 etapa = '3';
             }
-            else if (resp9 == 'S' || resp10 == 'S' || resp11 == 'S' || (edad >= 40 && edad <= 49)) //Etapa 4
+            else if (Convert.ToChar(res9.SelectedValue) == '1' || Convert.ToChar(res10.SelectedValue) == '1' || Convert.ToChar(res11.SelectedValue) == '1' || (edad >= 40 && edad <= 49)) //Etapa 4
+            {
+                etapa = '4';
+            }
+            else
+            {
+                etapa = '5';
+            }
+        }
+        else if (Convert.ToChar(resE9.SelectedValue) == '1')//No incluido Embarazo
+        {
+            etapa = '0';
+        }
+        else
+        {//No incluido
+            etapa = '0';
+        }
+        return etapa;
+    }
+    public void enviarFormulario(string localidad, string barrio, int idLocal, int idBarrio, string eps, char resp1, char resp2,
+        char resp3, char resp4, char resp5, char resp6, char resp7, char resp8, char resp9, char resp10, char resp11, char respE1,
+        char respE2, char respE3, char respE4, char respE5, char respE6, char respE7, char respE8, char respE9, char etapa)
+    {
+        Recursos recursos = new Recursos();
+        string path = "";
+        int edad = recursos.CalcularEdad(((EUsuario)Session["user"]).FechaNacimiento);
+
+        if (edad >= 16)
+        {
+            if (etapa == '1') //Etapa 1
+            {
+                path = "<img src='https://pbs.twimg.com/media/Ertb_JOW4AkADei.jpg' alt='Etapa 1 Covid-19'/>";
+                
+            }
+            else if (etapa == '2') //Etapa 2
+            {
+                path = "<img src='https://pbs.twimg.com/media/Ertb_pVW8AM98vg?format=jpg&name=medium' alt='Etapa 2 Covid-19'/>";
+                
+            }
+            else if (etapa == '3') //Etapa 3
+            {
+                path = "<img src='https://pbs.twimg.com/media/Ertb_pVW8AM98vg?format=jpg&name=medium' alt='Etapa 3 Covid-19'/>";
+                
+            }
+            else if (etapa == '4') //Etapa 4
             {
                 path = "<img src='https://pbs.twimg.com/media/ErtcAS7XcAQOdtL?format=jpg&name=medium' alt='Etapa 4 Covid-19'/>";
-                etapa = '4';
+                
             }
             else
             {
@@ -263,7 +333,8 @@ public partial class Views_Formulario : System.Web.UI.Page
             form.Epoc,
             form.Asma,
             form.Obesidad,
-            form.Embarazo);
+            form.Embarazo,
+            form.Etapa);
     }
 
     protected void btnLogOut_Click(object sender, EventArgs e)

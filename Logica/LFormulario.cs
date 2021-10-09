@@ -31,7 +31,7 @@ namespace Logica
             else
             {
                 resp.User = null;
-                resp.Mensaje = "Ya se realizo la solictud antes";
+                resp.Mensaje = "Ya se llenó el formulario antes...";
                 resp.Url = "../Views/Perfil.aspx";
             }
             return resp;
@@ -51,10 +51,12 @@ namespace Logica
         {
             return new DAOFormulario().getBarrioXId(id);
         }
-        public Respuesta guardarFormulario()
+        public Respuesta guardarFormulario(EFormulario form)
         {
             Respuesta resp = new Respuesta();
-
+            new DAOFormulario().guardar(form);
+            resp.Mensaje = "Formulario guardado correctamente";
+            resp.Url = "../Views/Perfil.aspx";
             return resp;
         }
     }
