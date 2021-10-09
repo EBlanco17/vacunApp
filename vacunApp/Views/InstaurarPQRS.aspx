@@ -55,7 +55,7 @@
                 <asp:ListItem Text="Sugerencias" />
             </asp:DropDownList>
             <asp:Label Text="Ingrese su reporte: " runat="server" CssClass="lblReport" />
-            <asp:TextBox runat="server" CssClass="txtReport" ID="txtReport" TextMode="MultiLine" MaxLength="150" Height="120px" BackColor="WindowFrame" Columns="50" Rows="10" />
+            <asp:TextBox runat="server" CssClass="txtReport" ID="txtReport" placeholder="Ingrese minímo 50 caracteres" TextMode="MultiLine" MaxLength="150" Height="120px" BackColor="WindowFrame" Columns="50" Rows="10" Required="true" SetFocusOnError="true" />
             <asp:Button Text="Enviar" CssClass="btnEnviar" ID="btnEnviar" OnClick="btnEnviar_Click" runat="server" />
         </div>
     </form>

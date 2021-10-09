@@ -13,7 +13,7 @@ namespace Logica
             if (user != null)
             {
                 resp.User = user;
-                resp.Mensaje = "Bienvenido" + user.Nombres;
+                resp.Mensaje = "Bienvenido: " + user.Nombres;
                 resp.Url = "../Views/Perfil.aspx";
             }
             else

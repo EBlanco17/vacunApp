@@ -14,7 +14,7 @@ namespace Logica
             if (numSolicitudes == 0)
             {
                 resp.User = null;
-                resp.Mensaje = null;
+                resp.Mensaje = "Realice una petición...";
                 resp.Url = "../Views/MensajeSolicitudAdmin.aspx";
             }
             else
@@ -60,7 +60,7 @@ namespace Logica
             Respuesta resp = new Respuesta();
             new DAOSolicitudAdmin().deleteUserRol(id);
             resp.User = null;
-            resp.Mensaje = null;
+            resp.Mensaje = "Solicitud rechazada";
             resp.Url = "../Views/SolicitudAdmin.aspx";
             return resp;
         }

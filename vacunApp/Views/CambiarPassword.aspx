@@ -42,11 +42,11 @@
 
             <h1>Cambiar Contraseña</h1>
             <asp:Label Text="Contraseña Actual: " CssClass="lblActual" runat="server" />
-            <asp:TextBox runat="server" CssClass="txtPass" ID="txtActual" placeholder="Ingrese Contraseña Actual" TextMode="password" />
+            <asp:TextBox runat="server" CssClass="txtPass" ID="txtActual" placeholder="Ingrese Contraseña Actual" TextMode="password" Required="true" SetFocusOnError="true"/>
             <asp:Label Text="Contraseña Nueva: " CssClass="lblNueva" runat="server" />
-            <asp:TextBox runat="server" CssClass="txtPass" ID="txtNueva" placeholder="Ingrese Contraseña Nueva" TextMode="password" />
+            <asp:TextBox runat="server" CssClass="txtPass" ID="txtNueva" placeholder="Ingrese Contraseña Nueva" TextMode="password" MaxLength="14" Required="true" SetFocusOnError="true"/>
             <asp:Label Text="Confirmar Contraseña: " CssClass="lblConfirm" runat="server" />
-            <asp:TextBox runat="server" CssClass="txtPass" ID="txtCnueva" placeholder="Ingrese Confirmación de Contraseña" TextMode="password" />
+            <asp:TextBox runat="server" CssClass="txtPass" ID="txtCnueva" placeholder="Ingrese Confirmación de Contraseña" TextMode="password" MaxLength="14" Required="true" SetFocusOnError="true"/>
             <asp:Button Text="Confirmar" CssClass="btnEnviar" ID="btnCambiar" OnClick="btnCambiar_Click" runat="server" />
 
         </div>

@@ -25,7 +25,7 @@ namespace Logica
             if (numForms == 0)
             {
                 resp.User = null;
-                resp.Mensaje = null;
+                resp.Mensaje = "La respuesta llegara a su correo";
                 resp.Url = null;
             }
             else

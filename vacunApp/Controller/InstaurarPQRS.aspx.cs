@@ -23,6 +23,11 @@ public partial class Views_PqrsEnvia : System.Web.UI.Page
     protected void btnEnviar_Click(object sender, EventArgs e)
     {
         DateTime fecha = DateTime.Today;
+        if (txtReport.Text.Length < 50)
+        {
+            HttpContext.Current.Response.Write("<script>alert('Registre una mejor descripcion')</script>");
+        }
+        else { 
         try
         {
             ESolicitud solicitud = new ESolicitud();
@@ -38,6 +43,7 @@ public partial class Views_PqrsEnvia : System.Web.UI.Page
         catch (Exception ex)
         {
             Console.Write(ex);
+        }
         }
     }
 }

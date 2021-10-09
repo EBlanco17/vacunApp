@@ -35,8 +35,8 @@ public partial class Views_RecuperarPass : System.Web.UI.Page
         string token = Convert.ToBase64String(miGuid.ToByteArray());
         token = token.Replace("=", "").Replace("+", "");
         token = token.Substring(0, longitud);
-
-        Respuesta resp = new LUsuario().recuperarPassword(correo, token);
+        string pass = Encrypt.GetSHA256(token);
+        Respuesta resp = new LUsuario().recuperarPassword(correo, pass);
         if (resp.User != null) { 
         string asunto = "Recuperación Contraseña";
         string body = "";

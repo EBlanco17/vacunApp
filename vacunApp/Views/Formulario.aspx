@@ -57,62 +57,62 @@
             <asp:DropDownList ID="dropBarrio" CssClass="dropMun" AutoPostBack="true" runat="server">
             </asp:DropDownList><br />
             <asp:Label Text="EPS:" CssClass="lbl" runat="server" />
-            <asp:TextBox runat="server" CssClass="txt" ID="txtEps" placeholder="Ingrese EPS" /><br />
+            <asp:TextBox runat="server" CssClass="txt" ID="txtEps" placeholder="Ingrese EPS" Required="true" SetFocusOnError="true"/><br />
 
             <asp:Label Text="1- ¿Ha sido usted diagnosticado en algún momento durante la actual contingencia de salud con COVID-19?" CssClass="lbl" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="res1" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="res1" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
             <asp:Label Text="2- ¿Trabajas en el area de la salud dando apoyo en areas COVID-19?" CssClass="lbl" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="res2" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="res2" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
             <asp:Label Text="3- ¿Trabajas en el area de la salud, en areas no COVID-19?" CssClass="lbl" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="res3" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="res3" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
             <asp:Label Text="4- ¿Eres estudiante de pregrado de programas de ciencia de la salud haciendo prácticas? " CssClass="lbl" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="res4" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="res4" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
 
             <asp:Label Text="5- ¿Eres cuidador de adultos mayores en atención domiciliaria, identificado por un prestador de servicio de salud?" CssClass="lbl" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="res5" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="res5" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
             <asp:Label Text="6- ¿Eres personal docente o administrativo educativo, inluye ICBF?" CssClass="lbl" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="res6" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="res6" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
             <asp:Label Text="7- ¿Perteneces a las fuerzas militares, policía o cuerpo de seguridad?" CssClass="lbl" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="res7" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="res7" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
             <asp:Label Text="8- ¿Trabajas en proximidad a cadáveres?" CssClass="lbl" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="res8" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="res8" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
 
             <asp:Label Text="9- ¿Perteneces al personal de custodia y vigilancia de la población privada de la libertad?" CssClass="lbl" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="res9" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="res9" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
             <asp:Label Text="10- ¿Perteneces a los bomberos, defensa civil o socorristas de la cruz roja?" CssClass="lbl" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="res10" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="res10" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
             <asp:Label Text="11- ¿Eres trabajador aéreo o aeroportuario (piloto o auxiliar)?" CssClass="lbl" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="res11" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="res11" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
@@ -120,47 +120,47 @@
             <br />
             <asp:Label CssClass="lbl3" Text="Diabetes" runat="server" />
             <br />
-            <asp:RadioButtonList runat="server" ID="resE1" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="resE1" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
             <asp:Label CssClass="lbl3" Text="Insuficiencia renal" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="resE2" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="resE2" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
             <asp:Label CssClass="lbl3" Text="VIH" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="resE3" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="resE3" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
             <asp:Label CssClass="lbl3" Text="Cáncer" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="resE4" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="resE4" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
             <asp:Label CssClass="lbl3" Text="Tuberculosis" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="resE5" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="resE5" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
             <asp:Label CssClass="lbl3" Text="Enfermedad pulmonar obstructiva crónica (EPOC)" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="resE6" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="resE6" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
             <asp:Label CssClass="lbl3" Text="Asma" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="resE7" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="resE7" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
             <asp:Label CssClass="lbl3" Text="Obesidad" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="resE8" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="resE8" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>
             <asp:Label CssClass="lbl3" Text="Embarazo" runat="server" /><br />
-            <asp:RadioButtonList runat="server" ID="resE9" CssClass="radio" RepeatDirection="Horizontal">
+            <asp:RadioButtonList runat="server" ID="resE9" CssClass="radio" RepeatDirection="Horizontal" Required="true" SetFocusOnError="true">
                 <asp:ListItem Text="SI" Value="S" />
                 <asp:ListItem Text="NO" Value="N" />
             </asp:RadioButtonList>

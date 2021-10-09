@@ -40,7 +40,7 @@
         <div class="mensajebox">
             <h1>Razón de su solicitud</h1>
             <asp:Label Text="Ingrese su razón: " runat="server" CssClass="lblReport" />
-            <asp:TextBox runat="server" CssClass="txtReport" ID="txtReport" TextMode="MultiLine" MaxLength="200" Height="120px" BackColor="WindowFrame" />
+            <asp:TextBox runat="server" CssClass="txtReport" ID="txtReport" TextMode="MultiLine" MaxLength="200" Height="120px" BackColor="WindowFrame" Required="true" SetFocusOnError="true"/>
             <asp:Button Text="Enviar" CssClass="btnEnviar" ID="btnEnviar" OnClick="btnEnviar_Click" runat="server" />
 
         </div>
