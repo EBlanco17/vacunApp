@@ -2,6 +2,7 @@
 using System.Web;
 using Utilitarios;
 using Logica;
+using System.Web.UI;
 
 public partial class Views_CambiarPass : System.Web.UI.Page
 {
@@ -22,8 +23,7 @@ public partial class Views_CambiarPass : System.Web.UI.Page
             user.Clave = Encrypt.GetSHA256(txtNueva.Text);
             Respuesta resp = new LUsuario().actualizarPassword(user);
             Session["user"] = resp.User;
-            HttpContext.Current.Response.Write("<script>alert('" + resp.Mensaje + "')</script>");
-            Response.Redirect(resp.Url);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
         }
         else
         {

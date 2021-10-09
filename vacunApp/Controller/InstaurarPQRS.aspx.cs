@@ -2,6 +2,7 @@
 using System.Web;
 using Utilitarios;
 using Logica;
+using System.Web.UI;
 
 public partial class Views_PqrsEnvia : System.Web.UI.Page
 {
@@ -32,8 +33,7 @@ public partial class Views_PqrsEnvia : System.Web.UI.Page
             solicitud.FechaLimite = fecha.AddDays(15);
 
             Respuesta resp = new LSolicitud().insertarSolicitud(solicitud);
-            Response.Write("<script>alert('" + resp.Mensaje + "')</script>");
-            Response.Redirect(resp.Url);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
         }
         catch (Exception ex)
         {

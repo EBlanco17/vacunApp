@@ -18,7 +18,7 @@ public class ESolicitud
     [Key]
     [Column("id")]
     public int Id { get => id; set => id = value; }
-    [Column("tipo_solicitud_id")]
+    [Column("tipo_solicitud")]
     public int TipoSolicitudId { get => tipoSolicitudId; set => tipoSolicitudId = value; }
     [Column("usuario_id")]
     public int UsuarioId { get => usuarioId; set => usuarioId = value; }

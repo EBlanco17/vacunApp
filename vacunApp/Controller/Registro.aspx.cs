@@ -57,8 +57,8 @@ public partial class Views_Registro : System.Web.UI.Page
         }
         else
         {
-            DateTime fechaNacimiento = DateTime.ParseExact(txtNac.Text, "yyyy-mm-dd", provider);
-            user.FechaNacimiento = fechaNacimiento;
+            DateTime fechaNacimiento = Convert.ToDateTime(txtNac.Text);
+            user.FechaNacimiento = Convert.ToDateTime(fechaNacimiento.ToShortDateString());
         }
 
         if (txtDoc.Text.Length < 8)
@@ -95,7 +95,7 @@ public partial class Views_Registro : System.Web.UI.Page
         {
             HttpContext.Current.Response.Write("<script>alert('Correo incorrecto')</script>");
         }
-
+        
         user.Genero = dropGenero.Text.ToUpper();
         user.RolId = 2;
 
@@ -109,8 +109,8 @@ public partial class Views_Registro : System.Web.UI.Page
              && user.Clave != null)
         {
             Respuesta resp = new LUsuario().registro(user, Txtemail.Text.ToUpper(), txtDoc.Text);
-            HttpContext.Current.Response.Write("<script>alert('" + resp.Mensaje + "')</script>");
-            Response.Redirect(resp.Url);
+            ScriptManager.RegisterStartupScript(this, this.GetType(),"alert","alert('"+resp.Mensaje+"');window.location ='"+resp.Url+"';",true);
+           
         }
 
     }

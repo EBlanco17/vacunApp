@@ -50,8 +50,8 @@ namespace Logica
                 else
                 {
                     resp.User = null;
-                    resp.Mensaje = "Error al crear usuario, documento ya registrado con el correo: "
-                        + new DAOUsuario().correoRegistrado(documento);
+                    string email = ((EUsuario)new DAOUsuario().correoRegistrado(documento)).Correo;
+                    resp.Mensaje = "Error al crear usuario, documento ya registrado con el correo: "+ email;
                     resp.Url = "../Views/Registro.aspx";
                 }
             }

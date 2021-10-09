@@ -26,8 +26,7 @@ public partial class Views_MensajeSolicitudAdmin : System.Web.UI.Page
             solAdmin.FechaIngreso = fecha;
             solAdmin.Mensaje = txtReport.Text;
             Respuesta resp = new LSolicitudAdmin().solicitarAdmin(solAdmin);
-            HttpContext.Current.Response.Write("<script>alert('" + resp.Mensaje + "')</script>");
-            Response.Redirect(resp.Url);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
         }
         catch (Exception ex)
         {

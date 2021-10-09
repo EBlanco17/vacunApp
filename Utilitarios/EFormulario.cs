@@ -10,6 +10,7 @@ namespace Utilitarios
     {
         private int id;
         private int usuarioId;
+        private int edad;
         private DateTime fechaIngreso;
         private int localidadId;
         private int barrioId;
@@ -41,6 +42,8 @@ namespace Utilitarios
         public int Id { get => id; set => id = value; }
         [Column("usuario_id")]
         public int UsuarioId { get => usuarioId; set => usuarioId = value; }
+        [Column("edad")]
+        public int Edad { get => edad; set => edad = value; }
         [Column("fecha_ingreso")]
         public DateTime FechaIngreso { get => fechaIngreso; set => fechaIngreso = value; }
         [Column("localidad_id")]
@@ -91,5 +94,6 @@ namespace Utilitarios
         public char Embarazo { get => embarazo; set => embarazo = value; }
         [Column("etapa")]
         public char Etapa { get => etapa; set => etapa = value; }
+       
     }
 }

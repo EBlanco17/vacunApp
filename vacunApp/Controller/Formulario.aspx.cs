@@ -3,7 +3,7 @@ using System.Web;
 using Utilitarios;
 using Logica;
 using System.Web.UI.WebControls;
-
+using System.Web.UI;
 
 public partial class Views_Formulario : System.Web.UI.Page
 {
@@ -19,19 +19,18 @@ public partial class Views_Formulario : System.Web.UI.Page
             else
             {
                 Respuesta resp = new LFormulario().comprobarFormulario(((EUsuario)Session["user"]).Id);
-                
-                if(resp.Url == null)
+
+                if (resp.Url == null)
                 {
-                    
+
                     IniciarLlenadoDropDown();
                 }
                 else
                 {
-                    HttpContext.Current.Response.Write("<script>alert('" + resp.Mensaje + "')</script>");
                     reenviarFormulario(new LFormulario().GetFormulario(((EUsuario)Session["user"]).Id));
-                    Response.Redirect(resp.Url);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
                 }
-                
+
             }
         }
     }
@@ -80,6 +79,7 @@ public partial class Views_Formulario : System.Web.UI.Page
         {
             EFormulario form = new EFormulario();
             form.UsuarioId = ((EUsuario)Session["user"]).Id;
+            form.Edad = new Recursos().CalcularEdad(((EUsuario)Session["user"]).FechaNacimiento);
             form.FechaIngreso = DateTime.Today;
             form.LocalidadId = dropLocal.SelectedIndex;
             form.BarrioId = dropBarrio.SelectedIndex;
@@ -107,13 +107,13 @@ public partial class Views_Formulario : System.Web.UI.Page
             form.Etapa = calcularEtapa();
             Respuesta resp = new LFormulario().guardarFormulario(form);
 
-            HttpContext.Current.Response.Write("<script>alert('" + resp.Mensaje + "')</script>");
-            Response.Redirect(resp.Url);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
 
             enviarFormulario(dropLocal.SelectedItem.Text,
             dropBarrio.SelectedItem.Text,
             form.LocalidadId,
             form.BarrioId,
+            form.Edad,
             form.Eps,
             form.DiagnosticoCovid,
             form.TrabajoCovid,
@@ -137,7 +137,6 @@ public partial class Views_Formulario : System.Web.UI.Page
             form.Embarazo,
             form.Etapa);
 
-            
         }
         else
         {
@@ -154,21 +153,21 @@ public partial class Views_Formulario : System.Web.UI.Page
 
         if (edad >= 16)
         {
-            if (Convert.ToChar(res2.SelectedValue) == '1' || edad >= 80) //Etapa 1
+            if (Convert.ToChar(res2.SelectedValue) == 'S' || edad >= 80) //Etapa 1
             {
                 etapa = '1';
             }
-            else if (Convert.ToChar(res3.SelectedValue) == '1' || Convert.ToChar(res4.SelectedValue) == '1' || (edad >= 60 && edad <= 79)) //Etapa 2
+            else if (Convert.ToChar(res3.SelectedValue) == 'S' || Convert.ToChar(res4.SelectedValue) == 'S' || (edad >= 60 && edad <= 79)) //Etapa 2
             {
                 etapa = '2';
             }
-            else if (Convert.ToChar(res5.SelectedValue) == '1' || Convert.ToChar(res6.SelectedValue) == '1' || Convert.ToChar(res7.SelectedValue) == '1' || Convert.ToChar(res8.SelectedValue) == '1'
-               || Convert.ToChar(resE1.SelectedValue) == '1' || Convert.ToChar(resE2.SelectedValue) == '1' || Convert.ToChar(resE3.SelectedValue) == '1' || Convert.ToChar(resE4.SelectedValue) == '1' || Convert.ToChar(resE5.SelectedValue) == '1' ||
-               Convert.ToChar(resE6.SelectedValue) == '1' || Convert.ToChar(resE7.SelectedValue) == '1' || Convert.ToChar(resE8.SelectedValue) == '1' || (edad >= 50 && edad <= 59)) //Etapa 3
+            else if (Convert.ToChar(res5.SelectedValue) == 'S' || Convert.ToChar(res6.SelectedValue) == 'S' || Convert.ToChar(res7.SelectedValue) == 'S' || Convert.ToChar(res8.SelectedValue) == 'S'
+               || Convert.ToChar(resE1.SelectedValue) == 'S' || Convert.ToChar(resE2.SelectedValue) == 'S' || Convert.ToChar(resE3.SelectedValue) == 'S' || Convert.ToChar(resE4.SelectedValue) == 'S' || Convert.ToChar(resE5.SelectedValue) == 'S' ||
+               Convert.ToChar(resE6.SelectedValue) == 'S' || Convert.ToChar(resE7.SelectedValue) == 'S' || Convert.ToChar(resE8.SelectedValue) == 'S' || (edad >= 50 && edad <= 59)) //Etapa 3
             {
                 etapa = '3';
             }
-            else if (Convert.ToChar(res9.SelectedValue) == '1' || Convert.ToChar(res10.SelectedValue) == '1' || Convert.ToChar(res11.SelectedValue) == '1' || (edad >= 40 && edad <= 49)) //Etapa 4
+            else if (Convert.ToChar(res9.SelectedValue) == 'S' || Convert.ToChar(res10.SelectedValue) == 'S' || Convert.ToChar(res11.SelectedValue) == 'S' || (edad >= 40 && edad <= 49)) //Etapa 4
             {
                 etapa = '4';
             }
@@ -177,9 +176,9 @@ public partial class Views_Formulario : System.Web.UI.Page
                 etapa = '5';
             }
         }
-        else if (Convert.ToChar(resE9.SelectedValue) == '1')//No incluido Embarazo
+        else if (Convert.ToChar(resE9.SelectedValue) == 'S')// Embarazo
         {
-            etapa = '0';
+            etapa = '5';
         }
         else
         {//No incluido
@@ -187,52 +186,44 @@ public partial class Views_Formulario : System.Web.UI.Page
         }
         return etapa;
     }
-    public void enviarFormulario(string localidad, string barrio, int idLocal, int idBarrio, string eps, char resp1, char resp2,
+    public void enviarFormulario(string localidad, string barrio, int idLocal, int idBarrio, int edad, string eps, char resp1, char resp2,
         char resp3, char resp4, char resp5, char resp6, char resp7, char resp8, char resp9, char resp10, char resp11, char respE1,
         char respE2, char respE3, char respE4, char respE5, char respE6, char respE7, char respE8, char respE9, char etapa)
     {
         Recursos recursos = new Recursos();
         string path = "";
-        int edad = recursos.CalcularEdad(((EUsuario)Session["user"]).FechaNacimiento);
-
-        if (edad >= 16)
+        
+        if (etapa == '0')
         {
-            if (etapa == '1') //Etapa 1
-            {
-                path = "<img src='https://pbs.twimg.com/media/Ertb_JOW4AkADei.jpg' alt='Etapa 1 Covid-19'/>";
-                
-            }
-            else if (etapa == '2') //Etapa 2
-            {
-                path = "<img src='https://pbs.twimg.com/media/Ertb_pVW8AM98vg?format=jpg&name=medium' alt='Etapa 2 Covid-19'/>";
-                
-            }
-            else if (etapa == '3') //Etapa 3
-            {
-                path = "<img src='https://pbs.twimg.com/media/Ertb_pVW8AM98vg?format=jpg&name=medium' alt='Etapa 3 Covid-19'/>";
-                
-            }
-            else if (etapa == '4') //Etapa 4
-            {
-                path = "<img src='https://pbs.twimg.com/media/ErtcAS7XcAQOdtL?format=jpg&name=medium' alt='Etapa 4 Covid-19'/>";
-                
-            }
-            else
-            {
-                path = "<img src='https://pbs.twimg.com/media/ErtcAS7XcAQOdtL?format=jpg&name=medium' alt='Etapa 5 Covid-19'/>";
-                etapa = '5';
-            }
+            path = "<img src='https://pbs.twimg.com/media/Eq-We-iW8AE1t8T.png' alt='Etapas Covid-19'/>";
         }
-        else if (respE9 == 'S')//No incluido Embarazo
+
+        else if (etapa == '1') //Etapa 1
         {
-            path = "<img src='https://drive.google.com/file/d/1P3Pg5wJox_NYgtAlFqRIr6Viuc8I2Q6z/view?usp=sharing' alt='Etapa Covid-19'/>";
-            etapa = '0';
+            path = "<img src='https://pbs.twimg.com/media/Ertb_JOW4AkADei.jpg' alt='Etapa 1 Covid-19'/>";
+
+        }
+        else if (etapa == '2') //Etapa 2
+        {
+            path = "<img src='https://pbs.twimg.com/media/Ertb_pVW8AM98vg?format=jpg&name=medium' alt='Etapa 2 Covid-19'/>";
+
+        }
+        else if (etapa == '3') //Etapa 3
+        {
+            path = "<img src='https://pbs.twimg.com/media/Ertb_pVW8AM98vg?format=jpg&name=medium' alt='Etapa 3 Covid-19'/>";
+
+        }
+        else if (etapa == '4') //Etapa 4
+        {
+            path = "<img src='https://pbs.twimg.com/media/ErtcAS7XcAQOdtL?format=jpg&name=medium' alt='Etapa 4 Covid-19'/>";
+
         }
         else
-        {//No incluido
-            path = "<img src='https://pbs.twimg.com/media/Eq-We-iW8AE1t8T.png' alt='Etapas Covid-19'/>";
-            etapa = '0';
+        {
+            path = "<img src='https://pbs.twimg.com/media/ErtcAS7XcAQOdtL?format=jpg&name=medium' alt='Etapa 5 Covid-19'/>";
+
         }
+
 
         string asunto = "Resultados Formulario";
         string body = @"<!doctype html>";
@@ -313,6 +304,7 @@ public partial class Views_Formulario : System.Web.UI.Page
             barrio,
             form.LocalidadId,
             form.BarrioId,
+            form.Edad,
             form.Eps,
             form.DiagnosticoCovid,
             form.TrabajoCovid,

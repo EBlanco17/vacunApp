@@ -51,36 +51,13 @@
                     <asp:BoundField DataField="id" HeaderText="ID" />
                     <asp:BoundField DataField="tipoSolicitudId" HeaderText="TIPO" />
                     <asp:BoundField DataField="usuarioId" HeaderText="ID USUARIO" />
-                    <asp:BoundField DataField="fechaIngreso" HeaderText="FECHA INGRESO" />
-                    <asp:BoundField DataField="fechaLimite" HeaderText="FECHA LIMITE" />
+                    <asp:BoundField DataField="fechaIngreso" HeaderText="FECHA INGRESO" DataFormatString="{0:d}"/>
+                    <asp:BoundField DataField="fechaLimite" HeaderText="FECHA LIMITE" DataFormatString="{0:d}"/>
                     <asp:HyperLinkField HeaderText="Ver" Text="Click" DataNavigateUrlFields="id"
                         DataNavigateUrlFormatString="~/Views/verSolicitudPQRS.aspx?solicitud={0}" NavigateUrl="~/Views/verSolicitudPQRS.aspx" />
                 </Columns>
             </asp:GridView>
         </div>
     </form>
-
-  <footer class="text-center text-white" style="background-color: #1e1e1e;">
-       <div class="container">
-            <div class="">
-                <!-- Facebook -->
-                <a class="btn btn-floating m-1" href="#" role="button" >
-                    <img src="../Assets/imagenes/icon-facebook.png" style="width:27px; height:27px;"/>
-                </a>
-
-                <!-- Gmail -->
-                <a class="btn btn-floating m-1" href="mailto:vacunapp21@gmail.com?subject=Mail Desde vacunapp.com" role="button" >
-                    <img src="../Assets/imagenes/icon-gmail.png" style="width:27px; height:27px;"/>
-                </a>
-
-            </div>
-        </div>
-
-
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2021 Copyright: VacunApp
-        </div>
-
-    </footer>
 </body>
 </html>

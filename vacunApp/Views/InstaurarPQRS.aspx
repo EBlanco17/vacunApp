@@ -60,30 +60,5 @@
         </div>
     </form>
     
-    <footer class="text-center text-white" style="background-color: cornflowerblue;">
-       <div class="container">
-            <div class="">
-                <!-- Facebook -->
-                <a class="btn btn-floating m-1" href="#" role="button" >
-                    <img src="../Assets/imagenes/icon-facebook.png" style="width:27px; height:27px;"/>
-                </a>
-
-                <!-- Gmail -->
-                <a class="btn btn-floating m-1" href="mailto:vacunapp21@gmail.com?subject=Mail Desde vacunapp.com" role="button" >
-                    <img src="../Assets/imagenes/icon-gmail.png" style="width:27px; height:27px;"/>
-                </a>
-
-            </div>
-        </div>
-
-
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-            © 2021 Copyright: VacunApp
-        </div>
-
-    </footer>
-    <script src="../Scripts/jquery-3.6.0.min.js"></script>
-    <script src="../Scripts/popper.min.js"></script>
-    <script src="../Scripts/bootstrap.min.js"></script>
-</body>
+   </body>
 </html>

@@ -2,6 +2,7 @@
 using System.Web;
 using Utilitarios;
 using Logica;
+using System.Web.UI;
 
 public partial class Views_verUsuario : System.Web.UI.Page
 {
@@ -41,7 +42,7 @@ public partial class Views_verUsuario : System.Web.UI.Page
         EUsuario user = new EUsuario();
         user.Id = Convert.ToInt32(int.Parse(Request.QueryString.Get(0)));
         Respuesta resp = new LSolicitudAdmin().cambiarRol(user);
-        HttpContext.Current.Response.Redirect(resp.Url);
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
     }
 
     protected void btnRechazar_Click(object sender, EventArgs e)
@@ -67,7 +68,6 @@ public partial class Views_verUsuario : System.Web.UI.Page
 
         recursos.SendMail(correo, body, asunto);
 
-        HttpContext.Current.Response.Write("<script>alert('" + resp.Mensaje + "')</script>");
-        HttpContext.Current.Response.Redirect(resp.Url);
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
     }
 }

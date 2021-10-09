@@ -2,6 +2,7 @@
 using System.Web;
 using Utilitarios;
 using Logica;
+using System.Web.UI;
 
 public partial class Views_RecuperarPass : System.Web.UI.Page
 {
@@ -36,7 +37,6 @@ public partial class Views_RecuperarPass : System.Web.UI.Page
         token = token.Substring(0, longitud);
 
         Respuesta resp = new LUsuario().recuperarPassword(correo, token);
-        Response.Write("<script>alert('" + resp.Mensaje + "')</script>");
         if (resp.User != null) { 
         string asunto = "Recuperación Contraseña";
         string body = "";
@@ -55,7 +55,7 @@ public partial class Views_RecuperarPass : System.Web.UI.Page
 
         recursos.SendMail(resp.User.Correo, body, asunto);
         }
-        Response.Redirect(resp.Url);
-        
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
+
     }
 }

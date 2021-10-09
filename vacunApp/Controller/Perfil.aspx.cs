@@ -39,8 +39,7 @@ public partial class Views_Perfil : System.Web.UI.Page
 
             int id = ((EUsuario)Session["user"]).Id;
             Respuesta resp = new LSolicitudAdmin().comprobarSolicitud(id);
-            HttpContext.Current.Response.Write("<script>alert('" + resp.Mensaje + "')</script>");
-            Response.Redirect(resp.Url);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
         }
         catch (Exception ex)
         {
@@ -72,9 +71,8 @@ public partial class Views_Perfil : System.Web.UI.Page
             user.RolId = 2;
 
             Respuesta resp = new LUsuario().actualizarDatos(user);
-            HttpContext.Current.Response.Write("<script>alert('" + resp.Mensaje + "')</script>");
             Session["user"] = resp.User;
-            Response.Redirect(resp.Url);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
 
         }
         catch (Exception ex)

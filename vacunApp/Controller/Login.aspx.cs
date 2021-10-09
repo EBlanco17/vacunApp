@@ -32,9 +32,9 @@ public partial class Views_Login : System.Web.UI.Page
         user.Clave = Encrypt.GetSHA256(txtClave.Text);
 
         Respuesta resp = new LUsuario().login(user);
-        HttpContext.Current.Response.Write("<script>alert('" + resp.Mensaje + "')</script>");
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
         Session["user"] = resp.User;
-        Response.Redirect(resp.Url);
+        
 
     }
 }
