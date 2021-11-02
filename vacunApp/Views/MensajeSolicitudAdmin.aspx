@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="../Assets/StylePqrs.css" rel="stylesheet" />
+    <link href="../Assets/StyleSolicitudAdmin.css" rel="stylesheet" />
     <link href="../Assets/bootstrap.min.css" rel="stylesheet" />
 
     <script src="../Assets/jquery.min.js"></script>
@@ -40,7 +40,7 @@
         <div class="mensajebox">
             <h1>Razón de su solicitud</h1>
             <asp:Label Text="Ingrese su razón: " runat="server" CssClass="lblReport" />
-            <asp:TextBox runat="server" CssClass="txtReport" ID="txtReport" TextMode="MultiLine" MaxLength="200" Height="120px" BackColor="WindowFrame" Required="true" SetFocusOnError="true"/>
+            <asp:TextBox runat="server" CssClass="txtReport" ID="txtReport" TextMode="MultiLine" MaxLength="200" Height="120px" BackColor="WindowFrame" Required="true" SetFocusOnError="true" placeholder="Máximo 200 caracteres"/>
             <asp:Button Text="Enviar" CssClass="btnEnviar" ID="btnEnviar" OnClick="btnEnviar_Click" runat="server" />
 
         </div>

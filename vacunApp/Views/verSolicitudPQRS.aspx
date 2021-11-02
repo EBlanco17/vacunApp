@@ -46,12 +46,9 @@
 
             <h2>SOLICITUD</h2>
 
-            <asp:Label Text="ID:" CssClass="lblId" runat="server" />
-            <asp:TextBox runat="server" CssClass="txtId" ID="txtId" Enabled="False" />
+            
             <asp:Label Text="Tipo:" CssClass="lbltipo" runat="server" />
             <asp:TextBox runat="server" CssClass="txtTipo" ID="txtTipo" Enabled="False" />
-            <asp:Label Text="ID Usuario:" CssClass="lblIdU" runat="server" />
-            <asp:TextBox runat="server" CssClass="txtIdU" ID="txtIdU" Enabled="False" />
             <asp:Label Text="Remitente:" CssClass="lblRem" runat="server" />
             <asp:TextBox runat="server" ID="txtRem" CssClass="txtRem" Enabled="False" />
             <asp:Label Text="Correo Remitente:" CssClass="lblCorreo" runat="server" />

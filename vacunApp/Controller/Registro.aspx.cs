@@ -3,6 +3,10 @@ using System.Web;
 using System.Web.UI;
 using System.Globalization;
 using Utilitarios;
+using System.Configuration;
+using System.Net;
+using Newtonsoft.Json;
+using System.IO;
 using Logica;
 
 public partial class Views_Registro : System.Web.UI.Page
@@ -10,7 +14,7 @@ public partial class Views_Registro : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         Response.Cache.SetNoStore();
-        if (Session["user"] != null) //hay sesion abierta
+        if (Session["user"] != null && Session["token"] != null) //hay sesion abierta
         {
             int rol = ((EUsuario)Session["user"]).RolId;
 
@@ -28,11 +32,11 @@ public partial class Views_Registro : System.Web.UI.Page
     protected void btnRegistrar_Click(object sender, EventArgs e)
     {
         CultureInfo provider = CultureInfo.InvariantCulture;
-        
+
         DateTime fecha;
         EUsuario user = new EUsuario();
 
-        if(txtNombre.Text.Length < 3)
+        if (txtNombre.Text.Length < 3)
         {
             HttpContext.Current.Response.Write("<script>alert('Nombre incorrecto')</script>");
         }
@@ -48,11 +52,11 @@ public partial class Views_Registro : System.Web.UI.Page
         {
             user.Apellidos = txtApellido.Text.ToUpper();
         }
-        
+
 
         if ((!DateTime.TryParse(txtNac.Text, out fecha)) || DateTime.Parse(txtNac.Text) >= DateTime.Today)
         {
-            
+
             HttpContext.Current.Response.Write("<script>alert('Fecha de Nacimiento incorrecta')</script>");
         }
         else
@@ -86,8 +90,8 @@ public partial class Views_Registro : System.Web.UI.Page
         {
             user.Clave = Encrypt.GetSHA256(txtClave.Text);
         }
-        
-        if(new Recursos().validarEmail(Txtemail.Text))
+
+        if (new Recursos().validarEmail(Txtemail.Text))
         {
             user.Correo = Txtemail.Text.ToUpper();
         }
@@ -95,7 +99,7 @@ public partial class Views_Registro : System.Web.UI.Page
         {
             HttpContext.Current.Response.Write("<script>alert('Correo incorrecto')</script>");
         }
-        
+
         user.Genero = dropGenero.Text.ToUpper();
         user.RolId = 2;
 
@@ -108,11 +112,44 @@ public partial class Views_Registro : System.Web.UI.Page
              && user.Telefono != null
              && user.Clave != null)
         {
-            Respuesta resp = new LUsuario().registro(user, Txtemail.Text.ToUpper(), txtDoc.Text);
-            ScriptManager.RegisterStartupScript(this, this.GetType(),"alert","alert('"+resp.Mensaje+"');window.location ='"+resp.Url+"';",true);
-           
-        }
+            var url = ConfigurationManager.AppSettings["HOST"] + "/Usuario/registro";
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            string json = JsonConvert.SerializeObject(user);
+            request.Method = "POST";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                streamWriter.Write(json);
+                streamWriter.Flush();
+                streamWriter.Close();
+            }
+            try
+            {
+                using (WebResponse response = request.GetResponse())
+                {
+                    using (Stream strReader = response.GetResponseStream())
+                    {
+                        if (strReader == null) return;
+                        using (StreamReader objReader = new StreamReader(strReader))
+                        {
+                            string responseBody = objReader.ReadToEnd();
+                            // Do something with responseBody
+                            Respuesta resp = JsonConvert.DeserializeObject<Respuesta>(responseBody);
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
+                            Session["user"] = resp.User;
+                        }
+                    }
+                }
+            }
+            catch (WebException ex)
+            {
+                // Handle error
+            }
 
+        }
     }
+
 }
+
 

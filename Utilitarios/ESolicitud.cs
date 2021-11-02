@@ -9,7 +9,7 @@ namespace Utilitarios {
 public class ESolicitud
 {
     private int id;
-    private int tipoSolicitudId;
+    private string tipoSolicitud;
     private int usuarioId;
     private DateTime fechaIngreso;
     private string mensaje;
@@ -19,7 +19,7 @@ public class ESolicitud
     [Column("id")]
     public int Id { get => id; set => id = value; }
     [Column("tipo_solicitud")]
-    public int TipoSolicitudId { get => tipoSolicitudId; set => tipoSolicitudId = value; }
+    public string TipoSolicitud { get => tipoSolicitud; set => tipoSolicitud = value; }
     [Column("usuario_id")]
     public int UsuarioId { get => usuarioId; set => usuarioId = value; }
     [Column("fecha_ingreso")]

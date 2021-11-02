@@ -22,17 +22,12 @@ namespace Logica
         {
             Respuesta resp = new Respuesta();
             int numForms = new DAOFormulario().verificarFormXUsuario(id);
-            if (numForms == 0)
-            {
-                resp.User = null;
-                resp.Mensaje = "La respuesta llegara a su correo";
-                resp.Url = null;
-            }
-            else
+         
+            if (numForms > 0)
             {
                 resp.User = null;
                 resp.Mensaje = "Ya se llenó el formulario antes...";
-                resp.Url = "../Views/Perfil.aspx";
+                resp.Url = "../Views/verFormulario.aspx";
             }
             return resp;
 
@@ -45,18 +40,22 @@ namespace Logica
         
         public string getNombreLocalidad(int id)
         {
-            return new DAOFormulario().getLocalidadXId(id);
+            ELocalidad localidad = new DAOFormulario().getLocalidadXId(id);
+            string nombre = localidad.Nombre;
+            return nombre;
         }
         public string getNombreBarrio(int id)
         {
-            return new DAOFormulario().getBarrioXId(id);
+            EBarrio barrio = new DAOFormulario().getBarrioXId(id);
+            string nombre = barrio.Nombre;
+            return nombre;
         }
         public Respuesta guardarFormulario(EFormulario form)
         {
             Respuesta resp = new Respuesta();
             new DAOFormulario().guardar(form);
             resp.Mensaje = "Formulario guardado correctamente";
-            resp.Url = "../Views/Perfil.aspx";
+            resp.Url = "../Views/verFormulario.aspx";
             return resp;
         }
     }

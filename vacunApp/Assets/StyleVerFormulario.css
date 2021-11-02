@@ -1,0 +1,82 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    background-image: radial-gradient(circle at 50.57% 43.52%, #ffa13a 0, #ff8f44 12.5%, #ff7b4c 25%, #ff6751 37.5%, #f25353 50%, #da4053 62.5%, #c43154 75%, #b02554 87.5%, #9f1d56 100%);
+    font-family: sans-serif;
+    color: #fff;
+}
+
+.botonsalir {
+    background: rgba(0, 0, 0, 0.5);
+    width: 100px;
+    text-align: center;
+    border-left: 5px;
+    border-right: 5px;
+}
+
+    .botonsalir:hover {
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+.navbar-brand {
+    height: 60px;
+}
+
+.nav-item {
+    top: 50%;
+    height: 40px;
+    text-align: center;
+}
+
+
+h1 {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    color: #fff;
+    font-family: Bahnschrift Condensed;
+}
+
+h2 {
+    color: #fff;
+    text-align: left;
+    font-family: Bahnschrift Condensed;
+}
+
+.lbl {
+    font-weight: bold;
+    color: #bbe1fa;
+    font-family: Bahnschrift Condensed;
+}
+
+.lbl3 {
+    margin-left: 15px;
+    color: #bbe1fa;
+    font-family: Bahnschrift Condensed;
+}
+.txtD {
+    margin-left: 15px;
+    color: #bbe1fa;
+    font-family: Bahnschrift Condensed;
+    width: 90px;
+    background: rgba(0, 0, 0, 0.0);
+}
+.txt {
+    margin-left: 15px;
+    color: #bbe1fa;
+    font-family: Bahnschrift Condensed;
+    width: 40px;
+    background: rgba(0, 0, 0, 0.0);
+}
+
+.Formbox {
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    width: 90%;
+    height: 1025px;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    font-size: 20px;
+    background: rgba(0,0,0,0.5);
+}

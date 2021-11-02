@@ -7,7 +7,7 @@ public partial class Views_FormDosis : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["user"] == null || ((EUsuario)Session["user"]).RolId == 1)
+        if (Session["user"] == null || ((EUsuario)Session["user"]).RolId == 1 || Session["token"] == null)
         {
             HttpContext.Current.Response.Redirect("../Views/Login.aspx");
         }

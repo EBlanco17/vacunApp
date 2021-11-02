@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Web;
+using System.Web.UI;
 using Utilitarios;
-using Logica;
+using System.Configuration;
+using System.Net;
+using Newtonsoft.Json;
+using System.IO;
+using System.Collections.Generic;
 
 public partial class Views_SolicitudAdmin : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        if (Session["user"] == null || ((EUsuario)Session["user"]).RolId == 2)
+        if (Session["user"] == null || ((EUsuario)Session["user"]).RolId == 2 || Session["token"] == null)
         {
             HttpContext.Current.Response.Redirect("../Views/Login.aspx");
         }
         else
         {
+
             this.bindData();
         }
 
@@ -21,14 +27,44 @@ public partial class Views_SolicitudAdmin : System.Web.UI.Page
 
     protected void bindData()
     {
-        LSolicitudAdmin datos = new LSolicitudAdmin();
-        tabla.DataSource = datos.verRegistros();
-        tabla.DataBind();
+        var url = ConfigurationManager.AppSettings["HOST"] + "/SolictudAdmin/verRegistros";
+        var request = (HttpWebRequest)WebRequest.Create(url);
+        request.Headers["Authorization"] = "Bearer " + Session["token"];
+        request.Method = "GET";
+        request.ContentType = "application/json";
+        request.Accept = "application/json";
+        try
+        {
+            using (WebResponse response = request.GetResponse())
+            {
+                using (Stream strReader = response.GetResponseStream())
+                {
+                    if (strReader == null) return;
+                    using (StreamReader objReader = new StreamReader(strReader))
+                    {
+                        string responseBody = objReader.ReadToEnd();
+
+                        List<ESolicitudAdmin> datos = JsonConvert.DeserializeObject<List<ESolicitudAdmin>>(responseBody);
+                        tabla.DataSource = datos;
+                        tabla.DataBind();
+                    }
+                }
+            }
+        }
+        catch (WebException ex)
+        {
+            Session["user"] = null;
+            Session["token"] = null;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No está autorizado para esta acción');window.location ='../Views/Login.aspx';", true);
+
+        }
+
     }
 
     protected void btnLogOut_Click(object sender, EventArgs e)
     {
         Session["user"] = null;
+        Session["token"] = null;
         HttpContext.Current.Response.Redirect("../Views/Login.aspx");
     }
 

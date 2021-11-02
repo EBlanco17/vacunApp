@@ -31,11 +31,11 @@ namespace Datos
             return new Mapeo().solAdmin.OrderBy(x => x.FechaIngreso).ToList();
         }
 
-        public void updateRol(EUsuario user)
+        public void updateRol(int id)
         {
             using (var db = new Mapeo())
             {
-                var usuarioEditar = db.usuario.FirstOrDefault(x => x.Id == user.Id);
+                var usuarioEditar = db.usuario.FirstOrDefault(x => x.Id == id);
                 usuarioEditar.RolId = 1;
                 db.SaveChanges();//confirmar el guardado
             }
@@ -55,11 +55,11 @@ namespace Datos
             }
         }
 
-        public ESolicitudAdmin getSolicitudXId(int solicitudId)
+        public ESolicitudAdmin getSolicitudXId(int userId)
         {
             using (var db = new Mapeo())
             {
-                return db.solAdmin.Where(x => x.Id == solicitudId).FirstOrDefault();
+                return db.solAdmin.Where(x => x.UsuarioId == userId).FirstOrDefault();
             }
         }
     }

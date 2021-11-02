@@ -59,43 +59,43 @@ namespace Logica
             }
         }
 
-        public void SendMail(string To, string Body, string Asunto)
-        {
-            string from = "vacunapp21@gmail.com";
-            string fromName = "VacunApp 2021";
-            string smtpUserName = "AKIAUV72BIA33VRDST6O";
-            string smtpPassword = "BIg5wZvvpOQ4IBQTlT6iVU1WtjNL/mxva8+cHzK1GXiD";
-            string configSet = "ConfigSet";
+        //public void SendMail(string To, string Body, string Asunto)
+        //{
+        //    string from = "vacunapp21@gmail.com";
+        //    string fromName = "VacunApp 2021";
+        //    string smtpUserName = "AKIAUV72BIA33VRDST6O";
+        //    string smtpPassword = "BIg5wZvvpOQ4IBQTlT6iVU1WtjNL/mxva8+cHzK1GXiD";
+        //    string configSet = "ConfigSet";
 
-            string host = "email-smtp.sa-east-1.amazonaws.com";
-            int port = 587;
-                       
+        //    string host = "email-smtp.sa-east-1.amazonaws.com";
+        //    int port = 587;
 
-            //MailMessage message = new MailMessage();
-            //message.IsBodyHtml = true;
-            //message.From = new MailAddress(from, fromName);
-            //message.To.Add(new MailAddress(To));
-            //message.Subject = Asunto;
-            //message.Body = Body;
 
-            //message.Headers.Add("X-SES-CONFIGURATION-SET", configSet);
+        //    //MailMessage message = new MailMessage();
+        //    //message.IsBodyHtml = true;
+        //    //message.From = new MailAddress(from, fromName);
+        //    //message.To.Add(new MailAddress(To));
+        //    //message.Subject = Asunto;
+        //    //message.Body = Body;
 
-            //using (var client = new SmtpClient(host, port))
-            //{
-            //    client.Credentials = new NetworkCredential(smtpUserName, smtpPassword);
+        //    //message.Headers.Add("X-SES-CONFIGURATION-SET", configSet);
 
-            //    client.EnableSsl = true;
+        //    //using (var client = new SmtpClient(host, port))
+        //    //{
+        //    //    client.Credentials = new NetworkCredential(smtpUserName, smtpPassword);
 
-            //    try
-            //    {
-            //        client.Send(message);
-            //    }
-            //    catch(Exception ex)
-            //    {
-            //        Console.WriteLine(ex);
-            //    }
-            //}
-         
-        }
+        //    //    client.EnableSsl = true;
+
+        //    //    try
+        //    //    {
+        //    //        client.Send(message);
+        //    //    }
+        //    //    catch(Exception ex)
+        //    //    {
+        //    //        Console.WriteLine(ex);
+        //    //    }
+        //    //}
+
+        //}
     }
 }

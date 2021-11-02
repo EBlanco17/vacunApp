@@ -3,12 +3,16 @@ using System.Web;
 using Utilitarios;
 using Logica;
 using System.Web.UI;
+using System.Configuration;
+using System.Net;
+using Newtonsoft.Json;
+using System.IO;
 
 public partial class Views_RecuperarPass : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["user"] != null) //hay sesion abierta
+        if (Session["user"] != null && Session["token"] != null) //hay sesion abierta
         {
             int rol = ((EUsuario)Session["user"]).RolId;
 
@@ -27,35 +31,42 @@ public partial class Views_RecuperarPass : System.Web.UI.Page
     protected void btnEnviar_Click(object sender, EventArgs e)
     {
         Recursos recursos = new Recursos();
-        string correo = txtCorreo.Text.ToUpper();
+        EUsuario user = new EUsuario();
+        user.Correo = txtCorreo.Text;
 
-        //Genera nuevo codigo
-        int longitud = 7;
-        Guid miGuid = Guid.NewGuid();
-        string token = Convert.ToBase64String(miGuid.ToByteArray());
-        token = token.Replace("=", "").Replace("+", "");
-        token = token.Substring(0, longitud);
-        string pass = Encrypt.GetSHA256(token);
-        Respuesta resp = new LUsuario().recuperarPassword(correo, pass);
-        if (resp.User != null) { 
-        string asunto = "Recuperación Contraseña";
-        string body = "";
-        body += "<html>";
-        body += "<head>";
-        body += "<meta charset='utf-8'>";
-        body += "<title>correo</title>";
-        body += "</head>";
-        body += "<h1>Recuperacion de Contraseña - VacunApp</h1>";
-        body += "<h3>Su nueva contraseña es:</h3>";
-        body += "<p>" + token + "</p>";
-        body += "<p>Por favor cambiela al momento de iniciar sesión.</p>";
-        body += "<body>";
-        body += "</body>";
-        body += "</html>";
-
-        recursos.SendMail(resp.User.Correo, body, asunto);
+        var url = ConfigurationManager.AppSettings["HOST"] + "/Usuario/recuperar";
+        var request = (HttpWebRequest)WebRequest.Create(url);
+        string json = JsonConvert.SerializeObject(user);
+        request.Method = "POST";
+        request.ContentType = "application/json";
+        request.Accept = "application/json";
+        using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+        {
+            streamWriter.Write(json);
+            streamWriter.Flush();
+            streamWriter.Close();
         }
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
-
+        try
+        {
+            using (WebResponse response = request.GetResponse())
+            {
+                using (Stream strReader = response.GetResponseStream())
+                {
+                    if (strReader == null) return;
+                    using (StreamReader objReader = new StreamReader(strReader))
+                    {
+                        string responseBody = objReader.ReadToEnd();
+                        // Do something with responseBody
+                        Respuesta resp = JsonConvert.DeserializeObject<Respuesta>(responseBody);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
+                    }
+                }
+            }
+        }
+        catch (WebException ex)
+        {
+            // Handle error
+        }
+        
     }
 }

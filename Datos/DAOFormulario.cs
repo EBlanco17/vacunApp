@@ -29,13 +29,14 @@ namespace Datos
             }
         }
 
-        public string getLocalidadXId(int id)
+        public ELocalidad getLocalidadXId(int id)
         {
-            return new Mapeo().localidades.Where(x => x.Id.Equals(id)).Select(x => x.Nombre).ToString();
+            return new Mapeo().localidades.Where(x => x.Id.Equals(id)).FirstOrDefault();
+            
         }
-        public string getBarrioXId(int id)
+        public EBarrio getBarrioXId(int id)
         {
-            return new Mapeo().barrios.Where(x => x.Id.Equals(id)).Select(x => x.Nombre).ToString();
+            return new Mapeo().barrios.Where(x => x.Id.Equals(id)).FirstOrDefault();
         }
 
         public EFormulario GetFormulario(int idUser)

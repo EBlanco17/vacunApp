@@ -21,7 +21,7 @@ namespace Logica
             {
                 resp.User = null;
                 resp.Mensaje = "Ya se realizo la solictud antes";
-                resp.Url = null;
+                resp.Url = "../Views/Perfil.aspx";
             }
             return resp;
         }
@@ -34,7 +34,7 @@ namespace Logica
             new DAOSolicitudAdmin().solicitarAdmin(solAdmin);
             resp.User = null;
             resp.Mensaje = "Mensaje Enviado";
-            resp.Url = "../Views/Login.aspx";
+            resp.Url = "../Views/Perfil.aspx";
 
             return resp;
         }
@@ -42,7 +42,7 @@ namespace Logica
         public Respuesta cambiarRol(EUsuario user)
         {
             Respuesta resp = new Respuesta();
-            new DAOSolicitudAdmin().updateRol(user);
+            new DAOSolicitudAdmin().updateRol(user.Id);
             new DAOSolicitudAdmin().deleteUserRol(user.Id);
             resp.User = null;
             resp.Mensaje = "Datos Actualizados Correctamente";

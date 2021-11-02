@@ -3,6 +3,10 @@ using System.Web;
 using Utilitarios;
 using Logica;
 using System.Web.UI;
+using System.Configuration;
+using System.Net;
+using Newtonsoft.Json;
+using System.IO;
 
 public partial class Views_verUsuario : System.Web.UI.Page
 {
@@ -11,17 +15,49 @@ public partial class Views_verUsuario : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            if (Session["user"] != null && ((EUsuario)Session["user"]).RolId == 1)
+            if (Session["user"] != null && ((EUsuario)Session["user"]).RolId == 1 && Session["token"] != null)
             {
-                Respuesta datos = new LUsuario().buscarRegistro(int.Parse(Request.QueryString.Get(0)));
-                ESolicitudAdmin datosS = new LSolicitudAdmin().verSolicitud(int.Parse(Request.QueryString.Get(0)));
-                txtRem.Text = datos.User.Nombres + " " + datos.User.Apellidos;
-                txtCorreo.Text = datos.User.Correo;
-                txtFechaNac.Text = datos.User.FechaNacimiento.ToShortDateString();
-                txtGen.Text = datos.User.Genero;
-                txtDoc.Text = datos.User.Documento;
-                txtFec.Text = datosS.FechaIngreso.ToShortDateString();
-                txtMsg.Text = datosS.Mensaje;
+
+                ESolicitudAdmin solicitud = new ESolicitudAdmin();
+                solicitud.UsuarioId = int.Parse(Request.QueryString.Get(0));
+
+                var url = ConfigurationManager.AppSettings["HOST"] + "/SolicitudAdmin/verSolictud";
+                var request = (HttpWebRequest)WebRequest.Create(url);
+                string json = JsonConvert.SerializeObject(solicitud);
+                request.Method = "POST";
+                request.ContentType = "application/json";
+                request.Accept = "application/json";
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+                try
+                {
+                    using (WebResponse response = request.GetResponse())
+                    {
+                        using (Stream strReader = response.GetResponseStream())
+                        {
+                            if (strReader == null) return;
+                            using (StreamReader objReader = new StreamReader(strReader))
+                            {
+                                string responseBody = objReader.ReadToEnd();
+                                // Do something with responseBody
+                                ESolicitudAdmin sol = JsonConvert.DeserializeObject<ESolicitudAdmin>(responseBody);
+                                cargarSolicitud(sol);
+                            }
+                        }
+                    }
+                }
+                catch (WebException ex)
+                {
+                    Session["user"] = null;
+                    Session["token"] = null;
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No está autorizado para esta acción');window.location ='../Views/Login.aspx';", true);
+
+                }
+
             }
             else
             {
@@ -31,43 +67,154 @@ public partial class Views_verUsuario : System.Web.UI.Page
         }
     }
 
+    public void cargarSolicitud(ESolicitudAdmin solicitud)
+    {
+
+        EUsuario usuario = new EUsuario();
+        usuario.Id = int.Parse(Request.QueryString.Get(0));
+
+        var url = ConfigurationManager.AppSettings["HOST"] + "/Usuario/buscarRegistro";
+        var request = (HttpWebRequest)WebRequest.Create(url);
+        string json = JsonConvert.SerializeObject(usuario);
+        request.Method = "POST";
+        request.ContentType = "application/json";
+        request.Accept = "application/json";
+        using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+        {
+            streamWriter.Write(json);
+            streamWriter.Flush();
+            streamWriter.Close();
+        }
+        try
+        {
+            using (WebResponse response = request.GetResponse())
+            {
+                using (Stream strReader = response.GetResponseStream())
+                {
+                    if (strReader == null) return;
+                    using (StreamReader objReader = new StreamReader(strReader))
+                    {
+                        string responseBody = objReader.ReadToEnd();
+                        // Do something with responseBody
+                        EUsuario user = JsonConvert.DeserializeObject<EUsuario>(responseBody);
+                        txtRem.Text = user.Nombres + " " + user.Apellidos;
+                        txtCorreo.Text = user.Correo;
+                        txtFechaNac.Text = user.FechaNacimiento.ToShortDateString();
+                        txtGen.Text = user.Genero;
+                        txtDoc.Text = user.Documento;
+                        txtFec.Text = solicitud.FechaIngreso.ToShortDateString();
+                        txtMsg.Text = solicitud.Mensaje;
+                    }
+                }
+            }
+        }
+        catch (WebException ex)
+        {
+            Session["user"] = null;
+            Session["token"] = null;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No está autorizado para esta acción');window.location ='../Views/Login.aspx';", true);
+
+        }
+
+
+    }
     protected void btnLogOut_Click(object sender, EventArgs e)
     {
         Session["user"] = null;
+        Session["token"] = null;
         HttpContext.Current.Response.Redirect("../Views/Inicio.html");
     }
 
     protected void btnCambiar_Click(object sender, EventArgs e)
     {
-        EUsuario user = new EUsuario();
+        
+           EUsuario user = new EUsuario();
         user.Id = Convert.ToInt32(int.Parse(Request.QueryString.Get(0)));
-        Respuesta resp = new LSolicitudAdmin().cambiarRol(user);
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
+        var url = ConfigurationManager.AppSettings["HOST"] + "/SolicitudAdmin/cambiarRol";
+        var request = (HttpWebRequest)WebRequest.Create(url);
+        request.Headers["Authorization"] = "Bearer " + Session["token"];
+        string json = JsonConvert.SerializeObject(user);
+        request.Method = "POST";
+        request.ContentType = "application/json";
+        request.Accept = "application/json";
+        using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+        {
+            streamWriter.Write(json);
+            streamWriter.Flush();
+            streamWriter.Close();
+        }
+        try
+        {
+            using (WebResponse response = request.GetResponse())
+            {
+                using (Stream strReader = response.GetResponseStream())
+                {
+                    if (strReader == null) return;
+                    using (StreamReader objReader = new StreamReader(strReader))
+                    {
+                        string responseBody = objReader.ReadToEnd();
+                        // Do something with responseBody
+                        Respuesta resp = JsonConvert.DeserializeObject<Respuesta>(responseBody);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
+                     
+                    }
+                }
+            }
+        }
+        catch (WebException ex)
+        {
+            Session["user"] = null;
+            Session["token"] = null;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No está autorizado para esta acción');window.location ='../Views/Login.aspx';", true);
+
+        }
+
     }
 
     protected void btnRechazar_Click(object sender, EventArgs e)
     {
-        int id = Convert.ToInt32(int.Parse(Request.QueryString.Get(0)));
-        Respuesta resp = new LSolicitudAdmin().rechazarSolicitud(id);
+  
         Recursos recursos = new Recursos();
-        string correo = txtCorreo.Text;
+        EUsuario user = new EUsuario();
+        user.Id = Convert.ToInt32(int.Parse(Request.QueryString.Get(0)));
 
-        string asunto = "Solicitud Administrador";
-        string body = "";
-        body += "<html>";
-        body += "<head>";
-        body += "<meta charset='utf-8'>";
-        body += "<title>correo</title>";
-        body += "</head>";
-        body += "<h1>Solicitud Administrador - VacunApp</h1>";
-        body += "<h3>Su solicitud ha sido rechazada...</h3>";
-        body += "<p>" + txtRes.Text + "</p>";
-        body += "<body>";
-        body += "</body>";
-        body += "</html>";
+        var url = ConfigurationManager.AppSettings["HOST"] + "/SolicitudAdmin/rechazarSolictud";
+        var request = (HttpWebRequest)WebRequest.Create(url);
+        request.Headers["Authorization"] = "Bearer " + Session["token"];
+        string json = JsonConvert.SerializeObject(user);
+        request.Method = "POST";
+        request.ContentType = "application/json";
+        request.Accept = "application/json";
+        using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+        {
+            streamWriter.Write(json);
+            streamWriter.Flush();
+            streamWriter.Close();
+        }
+        try
+        {
+            using (WebResponse response = request.GetResponse())
+            {
+                using (Stream strReader = response.GetResponseStream())
+                {
+                    if (strReader == null) return;
+                    using (StreamReader objReader = new StreamReader(strReader))
+                    {
+                        string responseBody = objReader.ReadToEnd();
+                        // Do something with responseBody
+                        Respuesta resp = JsonConvert.DeserializeObject<Respuesta>(responseBody);
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
+                   
+                    }
+                }
+            }
+        }
+        catch (WebException ex)
+        {
+            Session["user"] = null;
+            Session["token"] = null;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No está autorizado para esta acción');window.location ='../Views/Login.aspx';", true);
 
-        recursos.SendMail(correo, body, asunto);
-
-        ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
+        }
     }
 }

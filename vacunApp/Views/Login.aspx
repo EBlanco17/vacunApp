@@ -49,7 +49,7 @@
             <asp:Label Text="Correo" CssClass="lblemail" runat="server" />
             <asp:TextBox runat="server" CssClass="txtemail" ID="txtCorreo" placeholder="Ingrese Email" TextMode="Email" />
             <asp:Label Text="Clave" CssClass="lblemail" runat="server" />
-            <asp:TextBox runat="server" CssClass="txtemail" placeholder="Ingrese Clave" ID="txtClave" TextMode="Password" />
+            <asp:TextBox runat="server" CssClass="txtemail" placeholder="Ingrese Clave" ID="txtClave" TextMode="Password" MaxLength="14" />
             <asp:Button Text="Ingresar" CssClass="btnSubmit" ID="btnIngresar" OnClick="btnIngresar_Click" runat="server" />
             </div>
     </form>
