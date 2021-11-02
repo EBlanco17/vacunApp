@@ -22,6 +22,7 @@ public partial class Views_verSolicitudPQRS : System.Web.UI.Page
 
                 var url = ConfigurationManager.AppSettings["HOST"] + "/Solicitud/verSolictud";
                 var request = (HttpWebRequest)WebRequest.Create(url);
+                request.Headers["Authorization"] = "Bearer " + Session["token"];
                 string json = JsonConvert.SerializeObject(solicitud);
                 request.Method = "POST";
                 request.ContentType = "application/json";
@@ -74,6 +75,7 @@ public partial class Views_verSolicitudPQRS : System.Web.UI.Page
 
         var url = ConfigurationManager.AppSettings["HOST"] + "/Usuario/buscarRegistro";
         var request = (HttpWebRequest)WebRequest.Create(url);
+        request.Headers["Authorization"] = "Bearer " + Session["token"];
         string json = JsonConvert.SerializeObject(usuario);
         request.Method = "POST";
         request.ContentType = "application/json";
@@ -96,7 +98,8 @@ public partial class Views_verSolicitudPQRS : System.Web.UI.Page
                         string responseBody = objReader.ReadToEnd();
                         // Do something with responseBody
                         EUsuario user = JsonConvert.DeserializeObject<EUsuario>(responseBody);
-                        
+
+                        txtTipo.Text = solicitud.TipoSolicitud;
                         txtFec.Text = solicitud.FechaIngreso.ToShortDateString();
                         txtDesc.Text = solicitud.Mensaje;
                         txtRem.Text = user.Nombres + " " + user.Apellidos;
@@ -149,6 +152,7 @@ public partial class Views_verSolicitudPQRS : System.Web.UI.Page
 
         var url = ConfigurationManager.AppSettings["HOST"] + "/Solicitud/borrarSolictud";
         var request = (HttpWebRequest)WebRequest.Create(url);
+        request.Headers["Authorization"] = "Bearer " + Session["token"];
         string json = JsonConvert.SerializeObject(solicitud);
         request.Method = "POST";
         request.ContentType = "application/json";

@@ -27,7 +27,7 @@ public partial class Views_PqrsRecibe : System.Web.UI.Page
 
     protected void bindData()
     {
-        var url = ConfigurationManager.AppSettings["HOST"] + "/Solictud/verRegistros";
+        var url = ConfigurationManager.AppSettings["HOST"] + "/Solicitud/verRegistros";
         var request = (HttpWebRequest)WebRequest.Create(url);
         request.Headers["Authorization"] = "Bearer " + Session["token"];
         request.Method = "GET";

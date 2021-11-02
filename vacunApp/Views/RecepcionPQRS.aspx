@@ -49,7 +49,7 @@
                 OnPageIndexChanging="tabla_PageIndexChanging">
                 <Columns>
                     <asp:BoundField DataField="id" HeaderText="ID" />
-                    <asp:BoundField DataField="tipoSolicitudId" HeaderText="TIPO" />
+                    <asp:BoundField DataField="tipoSolicitud" HeaderText="TIPO" />
                     <asp:BoundField DataField="usuarioId" HeaderText="ID USUARIO" />
                     <asp:BoundField DataField="fechaIngreso" HeaderText="FECHA INGRESO" DataFormatString="{0:d}"/>
                     <asp:BoundField DataField="fechaLimite" HeaderText="FECHA LIMITE" DataFormatString="{0:d}"/>

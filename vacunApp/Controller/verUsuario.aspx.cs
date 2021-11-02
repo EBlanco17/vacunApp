@@ -23,6 +23,7 @@ public partial class Views_verUsuario : System.Web.UI.Page
 
                 var url = ConfigurationManager.AppSettings["HOST"] + "/SolicitudAdmin/verSolictud";
                 var request = (HttpWebRequest)WebRequest.Create(url);
+                request.Headers["Authorization"] = "Bearer " + Session["token"];
                 string json = JsonConvert.SerializeObject(solicitud);
                 request.Method = "POST";
                 request.ContentType = "application/json";
@@ -75,6 +76,7 @@ public partial class Views_verUsuario : System.Web.UI.Page
 
         var url = ConfigurationManager.AppSettings["HOST"] + "/Usuario/buscarRegistro";
         var request = (HttpWebRequest)WebRequest.Create(url);
+        request.Headers["Authorization"] = "Bearer " + Session["token"];
         string json = JsonConvert.SerializeObject(usuario);
         request.Method = "POST";
         request.ContentType = "application/json";

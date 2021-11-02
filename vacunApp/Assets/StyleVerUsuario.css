@@ -28,12 +28,9 @@
 
 
 .profilebox {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-22%);
-    width: 920px;
-    height: 760px;
+    transform: translate(22%,14%);
+    width: 70%;
+    height: 596px;
     padding: 15px 40px;
     box-sizing: border-box;
     font-size: 20px;
@@ -74,7 +71,7 @@ h2 {
 
 
 .txtRem, .txtCorreo, .txtfechaNac, .txtGen, .txtDoc, .txtFec {
-    width: 45%;
+    width: 38%;
     margin-bottom: 15px;
     border: none;
     border-bottom: 3px solid #fff;
@@ -90,6 +87,7 @@ h2 {
         border: none;
         outline: none;
         height: 40px;
+        width:49%;
         font-weight: bold;
         font-size: 18px;
         color: #fff;
@@ -109,6 +107,7 @@ h2 {
     border: none;
     outline: none;
     height: 40px;
+    width: 49%;
     font-weight: bold;
     font-size: 18px;
     color: #fff;

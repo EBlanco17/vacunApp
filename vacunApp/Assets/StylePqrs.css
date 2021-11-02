@@ -38,11 +38,8 @@
 }
 
 .pqrsbox {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 700px;
+    transform: translate(32%,30%);
+    width: 60%;
     height: 400px;
     padding: 15px 40px;
     box-sizing: border-box;

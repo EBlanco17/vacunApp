@@ -91,7 +91,7 @@ namespace API.Controllers
                         }
                     }
                 }
-                return Ok(new LSolicitud().verSolicitud(solicitud.UsuarioId));
+                return Ok(new LSolicitud().verSolicitud(solicitud.Id));
             }
             catch (Exception ex)
             {

@@ -58,7 +58,7 @@ h2 {
     margin-left: 15px;
     color: #bbe1fa;
     font-family: Bahnschrift Condensed;
-    width: 90px;
+    width: 30%;
     background: rgba(0, 0, 0, 0.0);
 }
 .txt {
@@ -70,10 +70,8 @@ h2 {
 }
 
 .Formbox {
-    position: absolute;
-    top: 15%;
-    left: 5%;
-    width: 90%;
+    transform: translate(13%,10%);
+    width: 80%;
     height: 1025px;
     padding: 15px 40px;
     box-sizing: border-box;

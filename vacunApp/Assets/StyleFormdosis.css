@@ -38,11 +38,8 @@
 }
 
 .Formbox {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 700px;
+    transform: translate(30%,30%);
+    width: 62%;
     height: 400px;
     padding: 15px 40px;
     box-sizing: border-box;

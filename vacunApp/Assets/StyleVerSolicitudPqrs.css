@@ -19,12 +19,9 @@
     }
 
 .boxPqrs {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-22%);
-    width: 920px;
-    height: 760px;
+    transform: translate(20%,14%);
+    width: 74%;
+    height: 640px;
     padding: 15px 40px;
     box-sizing: border-box;
     font-size: 20px;
@@ -68,14 +65,26 @@ h2 {
     background: rgba(0,0,0,0.2);
 }
 
-.txtRem, .txtCorreo, .txtFec, .btnEnviar {
+.txtCorreo, .txtFec, .btnEnviar {
     width: 100%;
     margin-bottom: 15px;
 }
-
-.txtId, .txtIdU, .txtTipo {
-    width: 25%;
+.txtRem {
+    width: 50%;
+    resize: none;
     margin-bottom: 15px;
+    border: none;
+    border-bottom: 3px solid #fff;
+    outline: none;
+    height: 35px;
+    color: #fff;
+    font-size: 16px;
+    background-color: transparent;
+    font-family: Bahnschrift Condensed;
+}
+
+ .txtTipo {
+    width: 35%;
     margin-bottom: 15px;
     border: none;
     border-bottom: 3px solid #fff;
@@ -88,7 +97,7 @@ h2 {
     text-align: center;
 }
 
-.txtRem, .txtCorreo, .txtFec {
+ .txtCorreo, .txtFec {
     resize: none;
     width: 100%;
     margin-bottom: 15px;

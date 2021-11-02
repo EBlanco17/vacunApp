@@ -201,26 +201,26 @@ public partial class Views_Formulario : System.Web.UI.Page
             form.LocalidadId = dropLocal.SelectedIndex;
             form.BarrioId = dropBarrio.SelectedIndex;
             form.Eps = txtEps.Text;
-            form.DiagnosticoCovid = Convert.ToChar(res1.SelectedValue);
-            form.TrabajoCovid = Convert.ToChar(res2.SelectedValue);
-            form.TrabajoNoCovid = Convert.ToChar(res3.SelectedValue);
-            form.EstudiaSalud = Convert.ToChar(res4.SelectedValue);
-            form.CuidaMayor = Convert.ToChar(res5.SelectedValue);
-            form.TrabajoEducacion = Convert.ToChar(res6.SelectedValue);
-            form.TrabajoSeguridad = Convert.ToChar(res7.SelectedValue);
-            form.TrabajoCadaveres = Convert.ToChar(res8.SelectedValue);
-            form.TrabajoReclusion = Convert.ToChar(res9.SelectedValue);
-            form.TrabajoBombero = Convert.ToChar(res10.SelectedValue);
-            form.TrabajoAeropuerto = Convert.ToChar(res11.SelectedValue);
-            form.Diabetes = Convert.ToChar(resE1.SelectedValue);
-            form.InsuficienciaRenal = Convert.ToChar(resE2.SelectedValue);
-            form.Vih = Convert.ToChar(resE3.SelectedValue);
-            form.Cancer = Convert.ToChar(resE4.SelectedValue);
-            form.Tuberculosis = Convert.ToChar(resE5.SelectedValue);
-            form.Epoc = Convert.ToChar(resE6.SelectedValue);
-            form.Asma = Convert.ToChar(resE7.SelectedValue);
-            form.Obesidad = Convert.ToChar(resE8.SelectedValue);
-            form.Embarazo = Convert.ToChar(resE9.SelectedValue);
+            form.DiagnosticoCovid = res1.SelectedValue;
+            form.TrabajoCovid = res2.SelectedValue;
+            form.TrabajoNoCovid =  res3.SelectedValue;
+            form.EstudiaSalud =  res4.SelectedValue;
+            form.CuidaMayor =  res5.SelectedValue;
+            form.TrabajoEducacion =  res6.SelectedValue;
+            form.TrabajoSeguridad =  res7.SelectedValue;
+            form.TrabajoCadaveres =  res8.SelectedValue;
+            form.TrabajoReclusion =  res9.SelectedValue;
+            form.TrabajoBombero =  res10.SelectedValue;
+            form.TrabajoAeropuerto =  res11.SelectedValue;
+            form.Diabetes =  resE1.SelectedValue;
+            form.InsuficienciaRenal =  resE2.SelectedValue;
+            form.Vih =  resE3.SelectedValue;
+            form.Cancer =  resE4.SelectedValue;
+            form.Tuberculosis =  resE5.SelectedValue;
+            form.Epoc =  resE6.SelectedValue;
+            form.Asma =  resE7.SelectedValue;
+            form.Obesidad =  resE8.SelectedValue;
+            form.Embarazo =  resE9.SelectedValue;
             form.Etapa = calcularEtapa();
 
 
@@ -270,44 +270,44 @@ public partial class Views_Formulario : System.Web.UI.Page
         }
 
     }
-    public char calcularEtapa()
+    public int calcularEtapa()
     {
         Recursos recursos = new Recursos();
-        char etapa = '0';
+        int etapa = 0;
         int edad = recursos.CalcularEdad(((EUsuario)Session["user"]).FechaNacimiento);
 
         if (edad >= 16)
         {
-            if (Convert.ToChar(res2.SelectedValue) == 'S' || edad >= 80) //Etapa 1
+            if ( res2.SelectedValue == "SI" || edad >= 80) //Etapa 1
             {
-                etapa = '1';
+                etapa = 1;
             }
-            else if (Convert.ToChar(res3.SelectedValue) == 'S' || Convert.ToChar(res4.SelectedValue) == 'S' || (edad >= 60 && edad <= 79)) //Etapa 2
+            else if ( res3.SelectedValue == "SI" ||  res4.SelectedValue == "SI" || (edad >= 60 && edad <= 79)) //Etapa 2
             {
-                etapa = '2';
+                etapa = 2;
             }
-            else if (Convert.ToChar(res5.SelectedValue) == 'S' || Convert.ToChar(res6.SelectedValue) == 'S' || Convert.ToChar(res7.SelectedValue) == 'S' || Convert.ToChar(res8.SelectedValue) == 'S'
-               || Convert.ToChar(resE1.SelectedValue) == 'S' || Convert.ToChar(resE2.SelectedValue) == 'S' || Convert.ToChar(resE3.SelectedValue) == 'S' || Convert.ToChar(resE4.SelectedValue) == 'S' || Convert.ToChar(resE5.SelectedValue) == 'S' ||
-               Convert.ToChar(resE6.SelectedValue) == 'S' || Convert.ToChar(resE7.SelectedValue) == 'S' || Convert.ToChar(resE8.SelectedValue) == 'S' || (edad >= 50 && edad <= 59)) //Etapa 3
+            else if ( res5.SelectedValue == "SI" ||  res6.SelectedValue == "SI" ||  res7.SelectedValue== "SI" ||  res8.SelectedValue == "SI"
+               ||  resE1.SelectedValue == "SI" ||  resE2.SelectedValue == "SI" ||  resE3.SelectedValue == "SI" ||  resE4.SelectedValue == "SI" ||  resE5.SelectedValue == "SI" ||
+                resE6.SelectedValue == "SI" ||  resE7.SelectedValue == "SI" ||  resE8.SelectedValue == "SI" || (edad >= 50 && edad <= 59)) //Etapa 3
             {
-                etapa = '3';
+                etapa = 3;
             }
-            else if (Convert.ToChar(res9.SelectedValue) == 'S' || Convert.ToChar(res10.SelectedValue) == 'S' || Convert.ToChar(res11.SelectedValue) == 'S' || (edad >= 40 && edad <= 49)) //Etapa 4
+            else if ( res9.SelectedValue == "SI" ||  res10.SelectedValue == "SI" ||  res11.SelectedValue == "SI" || (edad >= 40 && edad <= 49)) //Etapa 4
             {
-                etapa = '4';
+                etapa = 4;
             }
             else
             {
-                etapa = '5';
+                etapa = 5;
             }
         }
-        else if (Convert.ToChar(resE9.SelectedValue) == 'S')// Embarazo
+        else if ( resE9.SelectedValue == "SI")// Embarazo
         {
-            etapa = '5';
+            etapa = 5;
         }
         else
         {//No incluido
-            etapa = '0';
+            etapa = 0;
         }
         return etapa;
     }

@@ -1,7 +1,7 @@
 ﻿body {
     margin: 0;
     padding: 0;
-
+    background-image: radial-gradient(circle at 50.57% 43.52%, #ffa13a 0, #ff8f44 12.5%, #ff7b4c 25%, #ff6751 37.5%, #f25353 50%, #da4053 62.5%, #c43154 75%, #b02554 87.5%, #9f1d56 100%);
     font-family: sans-serif;
     color: #fff;
 }
@@ -29,11 +29,8 @@
 
 
 .mensajebox {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 700px;
+    transform: translate(30%,30%);
+    width: 60%;
     height: 300px;
     padding: 15px 40px;
     box-sizing: border-box;

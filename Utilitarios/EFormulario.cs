@@ -15,27 +15,27 @@ namespace Utilitarios
         private int localidadId;
         private int barrioId;
         private string eps;
-        private char diagnosticoCovid;
-        private char trabajoCovid;
-        private char trabajoNoCovid;
-        private char estudiaSalud;
-        private char cuidaMayor;
-        private char trabajoEducacion;
-        private char trabajoSeguridad;
-        private char trabajoCadaveres;
-        private char trabajoReclusion;
-        private char trabajoBombero;
-        private char trabajoAeropuerto;
-        private char diabetes;
-        private char insuficienciaRenal;
-        private char vih;
-        private char cancer;
-        private char tuberculosis;
-        private char epoc;
-        private char asma;
-        private char obesidad;
-        private char embarazo;
-        private char etapa;
+        private string diagnosticoCovid;
+        private string trabajoCovid;
+        private string trabajoNoCovid;
+        private string estudiaSalud;
+        private string cuidaMayor;
+        private string trabajoEducacion;
+        private string trabajoSeguridad;
+        private string trabajoCadaveres;
+        private string trabajoReclusion;
+        private string trabajoBombero;
+        private string trabajoAeropuerto;
+        private string diabetes;
+        private string insuficienciaRenal;
+        private string vih;
+        private string cancer;
+        private string tuberculosis;
+        private string epoc;
+        private string asma;
+        private string obesidad;
+        private string embarazo;
+        private int etapa;
 
         [Key]
         [Column("id")]
@@ -52,48 +52,48 @@ namespace Utilitarios
         public int BarrioId { get => barrioId; set => barrioId = value; }
         [Column("eps")]
         public string Eps { get => eps; set => eps = value; }
-        [Column("diagnosticoCovid")]
-        public char DiagnosticoCovid { get => diagnosticoCovid; set => diagnosticoCovid = value; }
-        [Column("trabajoCovid")]
-        public char TrabajoCovid { get => trabajoCovid; set => trabajoCovid = value; }
-        [Column("trabajoNoCovid")]
-        public char TrabajoNoCovid { get => trabajoNoCovid; set => trabajoNoCovid = value; }
-        [Column("estudiaSalud")]
-        public char EstudiaSalud { get => estudiaSalud; set => estudiaSalud = value; }
-        [Column("cuidaMayor")]
-        public char CuidaMayor { get => cuidaMayor; set => cuidaMayor = value; }
-        [Column("trabajoEducacion")]
-        public char TrabajoEducacion { get => trabajoEducacion; set => trabajoEducacion = value; }
-        [Column("trabajoSeguridad")]
-        public char TrabajoSeguridad { get => trabajoSeguridad; set => trabajoSeguridad = value; }
-        [Column("trabajoCadaveres")]
-        public char TrabajoCadaveres { get => trabajoCadaveres; set => trabajoCadaveres = value; }
-        [Column("trabajoReclusion")]
-        public char TrabajoReclusion { get => trabajoReclusion; set => trabajoReclusion = value; }
-        [Column("trabajoBombero")]
-        public char TrabajoBombero { get => trabajoBombero; set => trabajoBombero = value; }
-        [Column("trabajoAeropuerto")]
-        public char TrabajoAeropuerto { get => trabajoAeropuerto; set => trabajoAeropuerto = value; }
+        [Column("diagnosticocovid")]
+        public string DiagnosticoCovid { get => diagnosticoCovid; set => diagnosticoCovid = value; }
+        [Column("trabajocovid")]
+        public string TrabajoCovid { get => trabajoCovid; set => trabajoCovid = value; }
+        [Column("trabajonocovid")]
+        public string TrabajoNoCovid { get => trabajoNoCovid; set => trabajoNoCovid = value; }
+        [Column("estudiasalud")]
+        public string EstudiaSalud { get => estudiaSalud; set => estudiaSalud = value; }
+        [Column("cuidamayor")]
+        public string CuidaMayor { get => cuidaMayor; set => cuidaMayor = value; }
+        [Column("trabajoeducacion")]
+        public string TrabajoEducacion { get => trabajoEducacion; set => trabajoEducacion = value; }
+        [Column("trabajoseguridad")]
+        public string TrabajoSeguridad { get => trabajoSeguridad; set => trabajoSeguridad = value; }
+        [Column("trabajocadaveres")]
+        public string TrabajoCadaveres { get => trabajoCadaveres; set => trabajoCadaveres = value; }
+        [Column("trabajoreclusion")]
+        public string TrabajoReclusion { get => trabajoReclusion; set => trabajoReclusion = value; }
+        [Column("trabajobombero")]
+        public string TrabajoBombero { get => trabajoBombero; set => trabajoBombero = value; }
+        [Column("trabajoaeropuerto")]
+        public string TrabajoAeropuerto { get => trabajoAeropuerto; set => trabajoAeropuerto = value; }
         [Column("diabetes")]
-        public char Diabetes { get => diabetes; set => diabetes = value; }
-        [Column("ensuficienciaRenal")]
-        public char InsuficienciaRenal { get => insuficienciaRenal; set => insuficienciaRenal = value; }
+        public string Diabetes { get => diabetes; set => diabetes = value; }
+        [Column("ensuficienciarenal")]
+        public string InsuficienciaRenal { get => insuficienciaRenal; set => insuficienciaRenal = value; }
         [Column("vih")]
-        public char Vih { get => vih; set => vih = value; }
+        public string Vih { get => vih; set => vih = value; }
         [Column("cancer")]
-        public char Cancer { get => cancer; set => cancer = value; }
+        public string Cancer { get => cancer; set => cancer = value; }
         [Column("tuberculosis")]
-        public char Tuberculosis { get => tuberculosis; set => tuberculosis = value; }
+        public string Tuberculosis { get => tuberculosis; set => tuberculosis = value; }
         [Column("epoc")]
-        public char Epoc { get => epoc; set => epoc = value; }
+        public string Epoc { get => epoc; set => epoc = value; }
         [Column("asma")]
-        public char Asma { get => asma; set => asma = value; }
+        public string Asma { get => asma; set => asma = value; }
         [Column("obesidad")]
-        public char Obesidad { get => obesidad; set => obesidad = value; }
+        public string Obesidad { get => obesidad; set => obesidad = value; }
         [Column("embarazo")]
-        public char Embarazo { get => embarazo; set => embarazo = value; }
+        public string Embarazo { get => embarazo; set => embarazo = value; }
         [Column("etapa")]
-        public char Etapa { get => etapa; set => etapa = value; }
+        public int Etapa { get => etapa; set => etapa = value; }
        
     }
 }
