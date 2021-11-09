@@ -136,7 +136,7 @@ public partial class Views_verUsuario : System.Web.UI.Page
         var request = (HttpWebRequest)WebRequest.Create(url);
         request.Headers["Authorization"] = "Bearer " + Session["token"];
         string json = JsonConvert.SerializeObject(user);
-        request.Method = "POST";
+        request.Method = "PUT";
         request.ContentType = "application/json";
         request.Accept = "application/json";
         using (var streamWriter = new StreamWriter(request.GetRequestStream()))

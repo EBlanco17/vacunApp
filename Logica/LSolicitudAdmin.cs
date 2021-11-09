@@ -46,7 +46,7 @@ namespace Logica
             new DAOSolicitudAdmin().deleteUserRol(user.Id);
             resp.User = null;
             resp.Mensaje = "Datos Actualizados Correctamente";
-            resp.Url = "../Views/SolicitudAdmin.aspx";
+            resp.Url = "../Views/SolicitudesAdministrador.aspx";
             return resp;
 
         }

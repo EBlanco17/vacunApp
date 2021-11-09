@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Web;
 using Utilitarios;
-using Logica;
 using System.Web.UI;
 using System.Configuration;
 using System.Net;
@@ -30,7 +29,6 @@ public partial class Views_RecuperarPass : System.Web.UI.Page
 
     protected void btnEnviar_Click(object sender, EventArgs e)
     {
-        Recursos recursos = new Recursos();
         EUsuario user = new EUsuario();
         user.Correo = txtCorreo.Text;
 
