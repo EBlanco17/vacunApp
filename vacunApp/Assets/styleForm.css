@@ -1,9 +1,10 @@
 ﻿body {
     margin: 0;
     padding: 0;
-    background-image: radial-gradient(circle at 50.57% 43.52%, #ffa13a 0, #ff8f44 12.5%, #ff7b4c 25%, #ff6751 37.5%, #f25353 50%, #da4053 62.5%, #c43154 75%, #b02554 87.5%, #9f1d56 100%);
+    /*background-image: radial-gradient(circle at 50.57% 43.52%, #ffa13a 0, #ff8f44 12.5%, #ff7b4c 25%, #ff6751 37.5%, #f25353 50%, #da4053 62.5%, #c43154 75%, #b02554 87.5%, #9f1d56 100%);*/
     font-family: sans-serif;
     color: #fff;
+    background-color:burlywood; 
 }
 
 .botonsalir {
@@ -31,9 +32,9 @@
 
 
 .Formbox {
-    transform: translate(25%, 5%);
+    transform: translate(55%, 5%);
     width: 700px;
-    height: 1595px;
+    height: 1700px;
     padding: 15px 40px;
     box-sizing: border-box;
     font-size: 20px;
