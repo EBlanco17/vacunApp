@@ -129,8 +129,8 @@ public partial class Views_verUsuario : System.Web.UI.Page
 
     protected void btnCambiar_Click(object sender, EventArgs e)
     {
-        
-           EUsuario user = new EUsuario();
+
+        EUsuario user = new EUsuario();
         user.Id = Convert.ToInt32(int.Parse(Request.QueryString.Get(0)));
         var url = ConfigurationManager.AppSettings["HOST"] + "/SolicitudAdmin/cambiarRol";
         var request = (HttpWebRequest)WebRequest.Create(url);
@@ -158,7 +158,7 @@ public partial class Views_verUsuario : System.Web.UI.Page
                         // Do something with responseBody
                         Respuesta resp = JsonConvert.DeserializeObject<Respuesta>(responseBody);
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
-                     
+                        enviarcorreo();
                     }
                 }
             }
@@ -175,7 +175,7 @@ public partial class Views_verUsuario : System.Web.UI.Page
 
     protected void btnRechazar_Click(object sender, EventArgs e)
     {
-  
+
         Recursos recursos = new Recursos();
         EUsuario user = new EUsuario();
         user.Id = Convert.ToInt32(int.Parse(Request.QueryString.Get(0)));
@@ -206,7 +206,7 @@ public partial class Views_verUsuario : System.Web.UI.Page
                         // Do something with responseBody
                         Respuesta resp = JsonConvert.DeserializeObject<Respuesta>(responseBody);
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
-                   
+                        correorechazado();
                     }
                 }
             }
@@ -218,5 +218,48 @@ public partial class Views_verUsuario : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('No está autorizado para esta acción');window.location ='../Views/Login.aspx';", true);
 
         }
+    }
+
+    public void enviarcorreo()
+    {
+        Recursos recursos = new Recursos();
+        string asunto = "Solicitud administrador";
+        string body = "";
+        string correo = txtCorreo.Text;
+        body += "<html>";
+        body += "<head>";
+        body += "<meta charset='utf-8'>";
+        body += "<title>correo</title>";
+        body += "</head>";
+        body += "<h1>Ha sido aceptado como administrador</h1>";
+        body += "<h3>Ahora tendrá acceso a funcionalidades extra</h3>";
+        body += "<p>"+txtRes.Text+"</p>";
+        body += "<body>";
+        body += "<body>";
+        body += "</body>";
+        body += "</html>";
+
+        recursos.SendMail(correo, body, asunto);
+    }
+    public void correorechazado()
+    {
+        Recursos recursos = new Recursos();
+        string asunto = "Solicitud administrador";
+        string body = "";
+        string correo = txtCorreo.Text;
+        body += "<html>";
+        body += "<head>";
+        body += "<meta charset='utf-8'>";
+        body += "<title>correo</title>";
+        body += "</head>";
+        body += "<h1>Ha sido rechazado como administrador</h1>";
+        body += "<h3>En este momento no puede ser administrador, intentelo más adelante</h3>";
+        body += "<p>" + txtRes.Text + "</p>";
+        body += "<body>";
+        body += "<body>";
+        body += "</body>";
+        body += "</html>";
+
+        recursos.SendMail(correo, body, asunto);
     }
 }

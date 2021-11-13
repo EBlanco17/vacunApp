@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Net;
 using Newtonsoft.Json;
 using System.IO;
+using Logica;
 
 public partial class Views_RecuperarPass : System.Web.UI.Page
 {
@@ -57,6 +58,10 @@ public partial class Views_RecuperarPass : System.Web.UI.Page
                         // Do something with responseBody
                         Respuesta resp = JsonConvert.DeserializeObject<Respuesta>(responseBody);
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
+                        if (resp.User != null)
+                        {
+                            enviarcorreo(resp.User);
+                        }
                     }
                 }
             }
@@ -66,5 +71,26 @@ public partial class Views_RecuperarPass : System.Web.UI.Page
             // Handle error
         }
         
+    }
+
+    public void enviarcorreo(EUsuario user)
+    {
+        Recursos recursos = new Recursos();
+        string asunto = "Recuperación Contraseña";
+        string body = "";
+        body += "<html>";
+        body += "<head>";
+        body += "<meta charset='utf-8'>";
+        body += "<title>correo</title>";
+        body += "</head>";
+        body += "<h1>Recuperacion de Contraseña - VacunApp</h1>";
+        body += "<h3>Su nueva contraseña es su numero de documento</h3>";
+        body += "<p>Por favor cambiela al momento de iniciar sesión.</p>";
+        body += "<body>";
+        body += "<body>";
+        body += "</body>";
+        body += "</html>";
+
+        recursos.SendMail(user.Correo, body, asunto);
     }
 }

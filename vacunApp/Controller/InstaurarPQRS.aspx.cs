@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Net;
 using Newtonsoft.Json;
 using System.IO;
+using Logica;
 
 public partial class Views_PqrsEnvia : System.Web.UI.Page
 {
@@ -68,7 +69,7 @@ public partial class Views_PqrsEnvia : System.Web.UI.Page
                             // Do something with responseBody
                             Respuesta resp = JsonConvert.DeserializeObject<Respuesta>(responseBody);
                             ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('" + resp.Mensaje + "');window.location ='" + resp.Url + "';", true);
-
+                            enviarcorreo();
                         }
                     }
                 }
@@ -82,5 +83,26 @@ public partial class Views_PqrsEnvia : System.Web.UI.Page
             }
         }
 
+    }
+    public void enviarcorreo()
+    {
+        Recursos recursos = new Recursos();
+        string asunto = "Envío PQRS";
+        string body = "";
+        string correo = ((EUsuario)Session["user"]).Correo;      
+        body += "<html>";
+        body += "<head>";
+        body += "<meta charset='utf-8'>";
+        body += "<title>correo</title>";
+        body += "</head>";
+        body += "<h1>PQRS enviado exitosamente</h1>";
+        body += "<h3>Se dará una respuesta a su PQRS en máximo 15 días</h3>";
+        body += "<p>Reporte: "+txtReport.Text+"</p>";
+        body += "<body>";
+        body += "<body>";
+        body += "</body>";
+        body += "</html>";
+
+        recursos.SendMail(correo, body, asunto);
     }
 }
