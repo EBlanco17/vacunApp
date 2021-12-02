@@ -63,43 +63,7 @@ namespace Logica
             }
         }
 
-        public bool Send(string To, string Body, string Asunto)
-        {
-            bool respuesta = false;
-            try
-            {
-                // Obtiene los datos de configuracion
-                string servidor = "smtp.gmail.com";
-                int puerto = 587;
-                string from = "vacunapp21@gmail.com";
-                string password = "vacun2021_app";
-
-
-                MailMessage mensaje = new MailMessage();
-
-                mensaje.To.Add(To); //Correo del destinatario
-                //mensaje.CC.Add("prueba@prueba.com"); //Correo a quien quieren copiar
-                //mensaje.Bcc.Add("prueba@prueba.com"); //Correo Copia oculta
-
-                mensaje.From = new MailAddress(from);
-                mensaje.Subject = Asunto; // Asunto
-                mensaje.Body = Body;
-                mensaje.IsBodyHtml = true; //Boleano que identifica si el cuerpo esta en html par auna plantilla
-                mensaje.SubjectEncoding = Encoding.UTF8;
-
-                SmtpClient cliente = new SmtpClient(servidor, puerto);
-                cliente.Credentials = new NetworkCredential(from, password);
-                cliente.EnableSsl = false;
-                cliente.Credentials = CredentialCache.DefaultNetworkCredentials;
-                // Se envia el mail
-                cliente.Send(mensaje);
-                return respuesta;
-            }
-            catch (Exception ex)
-            {
-                return respuesta;
-            }
-        }
+        
         public void SendMail(string To, string Body, string asunto)
         {
             string from = "vacunapp21@gmail.com";
@@ -131,43 +95,6 @@ namespace Logica
             }
 
         }
-        //public void SendMail(string To, string Body, string Asunto)
-        //{
-        //    string from = "vacunapp21@gmail.com";
-        //    string fromName = "VacunApp 2021";
-        //    string smtpUserName = "AKIAUV72BIA33VRDST6O";
-        //    string smtpPassword = "BIg5wZvvpOQ4IBQTlT6iVU1WtjNL/mxva8+cHzK1GXiD";
-        //    string configSet = "ConfigSet";
-
-        //    string host = "email-smtp.sa-east-1.amazonaws.com";
-        //    int port = 587;
-
-
-        //    //MailMessage message = new MailMessage();
-        //    //message.IsBodyHtml = true;
-        //    //message.From = new MailAddress(from, fromName);
-        //    //message.To.Add(new MailAddress(To));
-        //    //message.Subject = Asunto;
-        //    //message.Body = Body;
-
-        //    //message.Headers.Add("X-SES-CONFIGURATION-SET", configSet);
-
-        //    //using (var client = new SmtpClient(host, port))
-        //    //{
-        //    //    client.Credentials = new NetworkCredential(smtpUserName, smtpPassword);
-
-        //    //    client.EnableSsl = true;
-
-        //    //    try
-        //    //    {
-        //    //        client.Send(message);
-        //    //    }
-        //    //    catch(Exception ex)
-        //    //    {
-        //    //        Console.WriteLine(ex);
-        //    //    }
-        //    //}
-
-        //}
+        
     }
 }
