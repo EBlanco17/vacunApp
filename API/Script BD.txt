@@ -1,0 +1,300 @@
+create schema audit;
+revoke create on schema audit from public;
+create table audit.logged_actions (
+    schema_name text not null,
+    table_name text not null,
+    user_name text,
+    action_tstamp timestamp with time zone not null default current_timestamp,
+    action TEXT NOT NULL check (action in ('I','D','U')),
+    original_data text,
+    new_data text,
+    query text
+) with (fillfactor=100);
+revoke all on audit.logged_actions from public;
+
+grant select on audit.logged_actions to public;
+
+create index logged_actions_schema_table_idx 
+on audit.logged_actions(((schema_name||'.'||table_name)::TEXT));
+
+create index logged_actions_action_tstamp_idx 
+on audit.logged_actions(action_tstamp);
+create index logged_actions_action_idx 
+on audit.logged_actions(action);
+
+CREATE OR REPLACE FUNCTION audit.if_modified_func() RETURNS trigger AS $body$
+DECLARE
+    v_old_data TEXT;
+    v_new_data TEXT;
+BEGIN
+    if (TG_OP = 'UPDATE') then
+        v_old_data := ROW(OLD.*);
+        v_new_data := ROW(NEW.*);
+        insert into audit.logged_actions (schema_name,table_name,user_name,action,original_data,new_data,query) 
+        values (TG_TABLE_SCHEMA::TEXT,TG_TABLE_NAME::TEXT,session_user::TEXT,substring(TG_OP,1,1),v_old_data,v_new_data, current_query());
+        RETURN NEW;
+    elsif (TG_OP = 'DELETE') then
+        v_old_data := ROW(OLD.*);
+        insert into audit.logged_actions (schema_name,table_name,user_name,action,original_data,query)
+        values (TG_TABLE_SCHEMA::TEXT,TG_TABLE_NAME::TEXT,session_user::TEXT,substring(TG_OP,1,1),v_old_data, current_query());
+        RETURN OLD;
+    elsif (TG_OP = 'INSERT') then
+        v_new_data := ROW(NEW.*);
+        insert into audit.logged_actions (schema_name,table_name,user_name,action,new_data,query)
+        values (TG_TABLE_SCHEMA::TEXT,TG_TABLE_NAME::TEXT,session_user::TEXT,substring(TG_OP,1,1),v_new_data, current_query());
+        RETURN NEW;
+    else
+        RAISE WARNING '[AUDIT.IF_MODIFIED_FUNC] - Other action occurred: %, at %',TG_OP,now();
+        RETURN NULL;
+    end if;
+
+EXCEPTION
+    WHEN data_exception THEN
+        RAISE WARNING '[AUDIT.IF_MODIFIED_FUNC] - UDF ERROR [DATA EXCEPTION] - SQLSTATE: %, SQLERRM: %',SQLSTATE,SQLERRM;
+        RETURN NULL;
+    WHEN unique_violation THEN
+        RAISE WARNING '[AUDIT.IF_MODIFIED_FUNC] - UDF ERROR [UNIQUE] - SQLSTATE: %, SQLERRM: %',SQLSTATE,SQLERRM;
+        RETURN NULL;
+    WHEN others THEN
+        RAISE WARNING '[AUDIT.IF_MODIFIED_FUNC] - UDF ERROR [OTHER] - SQLSTATE: %, SQLERRM: %',SQLSTATE,SQLERRM;
+        RETURN NULL;
+END;
+$body$
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = pg_catalog, audit;
+
+
+create schema security;
+drop table if exists security.usuario;
+create table security.usuario (
+id serial NOT NULL PRIMARY KEY,
+nombres text NOT NULL,
+apellidos text NOT NULL,
+documento text NOT NULL,
+fecha_nacimiento date NOT NULL, 
+genero text NOT NULL,
+telefono text NOT NULL,
+correo text NOT NULL, 
+clave text NOT NULL,
+rol_id int NOT NULL
+);
+CREATE TRIGGER usuario_if_modified_trg 
+ AFTER INSERT OR UPDATE OR DELETE ON security.usuario
+ FOR EACH ROW EXECUTE PROCEDURE audit.if_modified_func();
+
+create schema administrativo;
+drop table if exists administrativo.solicitudes;
+ create table administrativo.solicitudes (
+id serial NOT NULL PRIMARY KEY,
+usuario_id int NOT NULL,
+fecha_ingreso date NOT NULL,								
+mensaje text NOT NULL,
+fecha_limite date NOT NULL,
+tipo_solicitud text NOT NULL
+);
+CREATE TRIGGER solicitudes_if_modified_trg 
+ AFTER INSERT OR UPDATE OR DELETE ON administrativo.solicitudes
+ FOR EACH ROW EXECUTE PROCEDURE audit.if_modified_func();
+
+create table administrativo.solicitudesadmin (
+id serial NOT NULL PRIMARY KEY,
+usuario_id int NOT NULL,
+fecha_ingreso date NOT NULL,
+mensaje text NOT NULL									
+);
+CREATE TRIGGER solicitudesadmin_if_modified_trg 
+ AFTER INSERT OR UPDATE OR DELETE ON administrativo.solicitudesadmin
+ FOR EACH ROW EXECUTE PROCEDURE audit.if_modified_func();
+
+
+CREATE TABLE administrativo.localidades( 
+  id serial primary key, 
+  nombre  text NOT NULL
+); 
+
+insert into administrativo.localidades (id, nombre) values 
+(1,'ANTONIO NARIÑO'),
+(2,'BARRIOS UNIDOS'),
+(3,'BOSA'),
+(4,'CHAPINERO'),
+(5,'CIUDAD BOLIVAR'),
+(6,'ENGATIVA'),
+(7,'FONTIBON'),
+(8,'KENNEDY'),
+(9,'LA CANDELARIA'),
+(10,'LOS MARTIRES'),
+(11,'PUENTE ARANDA'),
+(12,'RAFAEL URIBE URIBE'),
+(13,'SAN CRISTOBAL'),
+(14,'SANTA FE'),
+(15,'SUBA'),
+(16,'SUMAPAZ'),
+(17,'TEUSAQUILLO'),
+(18,'TUNJUELITO'),
+(19,'USAQUEN'),
+(20,'USME');
+
+
+
+
+CREATE TABLE administrativo.barrios( 
+  id serial primary key,
+  nombre  text NOT NULL,
+  localidad_id int NOT NULL,
+FOREIGN KEY (localidad_id) REFERENCES administrativo.localidades(id)
+);
+
+insert into administrativo.barrios (id, nombre, localidad_id) values 
+(1,'CIUDAD JARDIN',1),
+(2,'RESTREPO',1),
+(3,'DOCE DE OCTUBRE',2),
+(4,'LOS ALCAZARES',2),
+(5,'LOS ANDES',2),
+(6,'PARQUE SALITRE',2),
+(7,'APOGEO',3),
+(8,'BOSA CENTRAL',3),
+(9,'BOSA OCCIDENTAL',3),
+(10,'EL PORVENIR',3),
+(11,'TINTAL SUR',3),
+(12,'CHAPINERO',4),
+(13,'CHICO LAGO',4),
+(14,'EL REFUGIO',4),
+(15,'PARDO RUBIO',4),
+(16,'SAN ISIDRO PATIOS',4),
+(17,'ARBORIZADORA',5),
+(18,'EL MOCHUELO',5),
+(19,'EL TESORO',5),
+(20,'ISMAEL PERDOMO',5),
+(21,'JERUSALEN',5),
+(22,'LUCERO',5),
+(23,'MONTEBLANCO',5),
+(24,'SAN FRANCISCO',5),
+(25,'ALAMOS',6),
+(26,'BOLIVIA',6),
+(27,'BOYACA REAL',6),
+(28,'ENGATIVA',6),
+(29,'GARCES NAVAS',6),
+(30,'JARDIN BOTANICO',6),
+(31,'LAS FERIAS',6),
+(32,'MINUTO DE DIOS',6),
+(33,'SANTA CECILIA',6),
+(34,'AEROPUERTO EL DORADO',7),
+(35,'CAPELLANIA',7),
+(36,'CIUDAD SALITRE OCCIDENTE',7),
+(37,'FONTIBON',7),
+(38,'FONTIBON SAN PABLO',7),
+(39,'GRANJAS DE TECHO',7),
+(40,'MODELIA',7),
+(41,'ZONA FRANCA',7),
+(42,'AMERICAS',8),
+(43,'BAVARIA',8),
+(44,'CALANDAIMA',8),
+(45,'CARVAJAL',8),
+(46,'CASTILLA',8),
+(47,'CORABASTOS',8),
+(48,'GRAN BRITALIA',8),
+(49,'KENNEDY CENTRAL',8),
+(50,'LAS MARGARITAS',8),
+(51,'PATIO BONITO',8),
+(52,'TIMIZA',8),
+(53,'TINTAL NORTE',8),
+(54,'CANDELARIA',9),
+(55,'LA SABANA',10),
+(56,'SANTA ISABEL',10),
+(57,'CIUDAD MONTES',11),
+(58,'MUZU',11),
+(59,'PUENTE ARANDA',11),
+(60,'SAN RAFAEL',11),
+(61,'ZONA INDUSTRIAL',11),
+(62,'DIANA TURBAY',12),
+(63,'MARCO FIDEL SUAREZ',12),
+(64,'MARRUECOS',12),
+(65,'QUIROGA',12),
+(66,'SAN JOSE',12),
+(67,'20 DE JULIO',13),
+(68,'LA GLORIA',13),
+(69,'LOS LIBERTADORES',13),
+(70,'SAN BLAS',13),
+(71,'SOSIEGO',13),
+(72,'LA MACARENA',14),
+(73,'LAS CRUCES',14),
+(74,'LAS NIEVES',14),
+(75,'LOURDES',14),
+(76,'SAGRADO CORAZON',14),
+(77,'BRITALIA',15),
+(78,'CASA BLANCA SUBA',15),
+(79,'EL PRADO',15),
+(80,'EL RINCON',15),
+(81,'GUAYMARAL',15),
+(82,'LA ACADEMIA',15),
+(83,'LA ALHAMBRA',15),
+(84,'LA FLORESTA',15),
+(85,'NIZA',15),
+(86,'SAN JOSE DE BAVARIA',15),
+(87,'SUBA',15),
+(88,'TIBABUYES',15),
+(89,'SUMAPAZ',16),
+(90,'CIUDAD SALITRE ORIENTAL',17),
+(91,'GALERIAS',17),
+(92,'LA ESMERALDA',17),
+(93,'PARQUE SIMON BOLIVAR-CAN',17),
+(94,'QUINTA PAREDES',17),
+(95,'TEUSAQUILLO',17),
+(96,'TUNJUELITO',18),
+(97,'VENECIA',18),
+(98,'COUNTRY CLUB',19),
+(99,'LA URIBE',19),
+(100,'LOS CEDROS',19),
+(101,'PASEO DE LOS LIBERTADORES',19),
+(102,'SAN CRISTOBAL NORTE',19),
+(103,'SANTA BARBARA',19),
+(104,'TOBERIN',19),
+(105,'USAQUEN',19),
+(106,'VERBENAL',19),
+(107,'ALFONSO LOPEZ',20),
+(108,'CIUDAD DE USME',20),
+(109,'COMUNEROS',20),
+(110,'DANUBIO',20),
+(111,'GRAN YOMASA',20),
+(112,'LA FLORA',20),
+(113,'PARQUE ENTRENUBES',20);
+
+
+
+
+
+CREATE TABLE administrativo.formulario( 
+id serial primary key NOT NULL,
+usuario_id int NOT NULL,
+edad int NOT NULL,
+fecha_ingreso date NOT NULL,
+localidad_id int NOT NULL,
+barrio_id int NOT NULL,
+eps text NOT NULL,
+diagnosticoCovid text NOT NULL,
+trabajoCovid text NOT NULL,
+trabajoNoCovid text NOT NULL,
+estudiaSalud text NOT NULL,
+cuidaMayor text NOT NULL,
+trabajoEducacion text NOT NULL,
+trabajoSeguridad text NOT NULL,
+trabajoCadaveres text NOT NULL,
+trabajoReclusion text NOT NULL,
+trabajoBombero text NOT NULL,
+trabajoAeropuerto text NOT NULL,
+diabetes text NOT NULL,
+ensuficienciaRenal text NOT NULL,
+vih text NOT NULL,
+cancer text NOT NULL,
+tuberculosis text NOT NULL,
+epoc text NOT NULL,
+asma text NOT NULL,
+obesidad text NOT NULL,
+embarazo text NOT NULL,
+etapa int NOT NULL,
+FOREIGN KEY (usuario_id) REFERENCES security.usuario(id),
+FOREIGN KEY (localidad_id) REFERENCES administrativo.localidades(id),
+FOREIGN KEY (barrio_id) REFERENCES administrativo.barrios(id)
+);
+
